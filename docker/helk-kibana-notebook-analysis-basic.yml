@@ -21,7 +21,7 @@ services:
       - cluster.name=helk-cluster
       - node.name=helk-1
       - xpack.license.self_generated.type=basic
-      - xpack.security.enabled=true
+      - xpack.security.enabled=false
       #- "HELK_ES_MEMORY=-Xms$2g -Xmx2g"
     ulimits:
       memlock:
