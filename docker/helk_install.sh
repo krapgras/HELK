@@ -6,8 +6,8 @@
 # Author: Roberto Rodriguez (@Cyb3rWard0g)
 # License: GPL-3.0
 
-HELK_BUILD_VERSION="v0.1.9-alpha10082020"
-HELK_ELK_VERSION="7.6.2"
+HELK_BUILD_VERSION="v0.2.1-alpha09122023"
+HELK_ELK_VERSION="8.11.1"
 SUBSCRIPTION_CHOICE="basic"
 
 # *********** Helk log tagging variables ***************
@@ -527,6 +527,7 @@ show_banner() {
   echo "**          HELK - THE HUNTING ELK           **"
   echo "**                                           **"
   echo "** Author: Roberto Rodriguez (@Cyb3rWard0g)  **"
+  echo "** Editor: me                                **"
   echo "** HELK build version: ${HELK_BUILD_VERSION} **"
   echo "** HELK ELK version: ${HELK_ELK_VERSION}     **"
   echo "** License: GPL-3.0                          **"

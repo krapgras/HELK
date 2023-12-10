@@ -7,8 +7,8 @@
 # Script Author: Dev Dua (@devdua)
 # License: GPL-3.0
 
-HELK_BUILD_VERSION="v0.1.9-alpha03272020"
-HELK_ELK_VERSION="7.6.2"
+HELK_BUILD_VERSION="v0.2.10-alpha09122023"
+HELK_ELK_VERSION="8.11.1"
 
 RED='\033[0;31m'
 CYAN='\033[0;36m'
@@ -33,6 +33,7 @@ show_banner(){
     echo "**          HELK - THE HUNTING ELK           **"
     echo "**                                           **"
     echo "** Author: Roberto Rodriguez (@Cyb3rWard0g)  **"
+    echo "** Editor: Me                                **"
     echo "** HELK build version: ${HELK_BUILD_VERSION} **"
     echo "** HELK ELK version: {$HELK_ELK_VERSION}     **"
     echo "** License: GPL-3.0                          **"
@@ -315,7 +316,7 @@ check_github(){
 
     if [ $GIT_REPO_CLEAN == 1 ]; then
         if [[ -z "$(git remote | grep helk-repo)" ]]; then
-            git remote add helk-repo https://github.com/Cyb3rWard0g/HELK.git  >> $LOGFILE 2>&1
+            git remote add helk-repo https://github.com/divebumzac/HELK.git  >> $LOGFILE 2>&1
         else
             echo "HELK repo exists" >> $LOGFILE 2>&1
         fi
@@ -362,7 +363,7 @@ check_github(){
     else
         cd ..
         git clean  -d  -fx . >> $LOGFILE 2>&1
-        git remote add helk-repo https://github.com/Cyb3rWard0g/HELK.git  >> $LOGFILE 2>&1
+        git remote add helk-repo https://github.com/divebumzac/HELK.git  >> $LOGFILE 2>&1
         git pull helk-repo master >> $LOGFILE 2>&1    
     fi
 }

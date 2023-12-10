@@ -4,6 +4,7 @@
 # HELK script description: Install docker and docker-compose
 # HELK build Stage: Alpha
 # Author: Roberto Rodriguez (@Cyb3rWard0g)
+# Editor: Me
 # License: GPL-3.0
 
 DOCKER_INFO_TAG="[DOCKER-INSTALLATION-INFO]"
