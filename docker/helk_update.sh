@@ -8,7 +8,7 @@
 # License: GPL-3.0
 
 HELK_BUILD_VERSION="v0.2.10-alpha09122023"
-HELK_ELK_VERSION="8.11.1"
+HELK_ELK_VERSION="8.13.3"
 
 RED='\033[0;31m'
 CYAN='\033[0;36m'
@@ -316,7 +316,7 @@ check_github(){
 
     if [ $GIT_REPO_CLEAN == 1 ]; then
         if [[ -z "$(git remote | grep helk-repo)" ]]; then
-            git remote add helk-repo https://github.com/divebumzac/HELK.git  >> $LOGFILE 2>&1
+            git remote add helk-repo https://github.com/krapgras/HELK.git  >> $LOGFILE 2>&1
         else
             echo "HELK repo exists" >> $LOGFILE 2>&1
         fi
@@ -363,7 +363,7 @@ check_github(){
     else
         cd ..
         git clean  -d  -fx . >> $LOGFILE 2>&1
-        git remote add helk-repo https://github.com/divebumzac/HELK.git  >> $LOGFILE 2>&1
+        git remote add helk-repo https://github.com/krapgras/HELK.git  >> $LOGFILE 2>&1
         git pull helk-repo master >> $LOGFILE 2>&1    
     fi
 }

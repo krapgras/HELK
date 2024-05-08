@@ -36,7 +36,7 @@
 Run the following commands to clone the HELK repo via git.
 
 ```bash
-git clone https://github.com/divebumzac/HELK.git
+git clone https://github.com/krapgras/HELK.git
 ```
 
 ## HELK Install
