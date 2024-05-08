@@ -16,7 +16,7 @@ ENV ESALERT_SIGMA_HOME=/opt/sigma
 # *********** Installing Prerequisites ***************
 # -qq : No output except for errors
 RUN apt-get update -qq && apt-get install -qqy --no-install-recommends \
-  python3.6 \
+  python3.12.3 \
   libmagic-dev \
   build-essential \
   python3-setuptools \
@@ -38,11 +38,11 @@ RUN apt-get update -qq && apt-get install -qqy --no-install-recommends \
   && pip3 install urllib3 \
   && pip3 install -U enum34 \
   #TODO: temporary fix  https://github.com/Yelp/elastalert/issues/2725 also https://github.com/Cyb3rWard0g/HELK/issues/505
-  && pip3 install --force-reinstall elasticsearch==7.0.0 \
+  && pip3 install --force-reinstall elasticsearch==8.13.1 \
   && pip3 install -r requirements.txt \
   && python3 setup.py install \
   # ********* Download SIGMA *******************
-  && git clone https://github.com/Cyb3rWard0g/sigma.git -b helk_neu5ron_updates ${ESALERT_SIGMA_HOME}
+  && git clone https://github.com/SigmaHQ/sigma.git ${ESALERT_SIGMA_HOME}
 
 # ********* Copy Elastalert files **************
 COPY scripts/* ${ESALERT_HOME}/
