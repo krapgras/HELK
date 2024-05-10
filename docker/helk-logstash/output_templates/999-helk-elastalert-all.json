@@ -4,13 +4,15 @@
     "elastalert*"
   ],
   "version": 2019082901,
-  "settings": {
-    "index": {
-      "mapping": {
-        "total_fields.limit": "10000"
-      }
-    },
-    "number_of_replicas": 0,
-    "number_of_shards": 2
+  "template": {
+    "settings": {
+      "index": {
+        "mapping": {
+          "total_fields.limit": "10000"
+        }
+      },
+      "number_of_replicas": 0,
+      "number_of_shards": 2
+    }
   }
 }

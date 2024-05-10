@@ -2,10 +2,12 @@
   "priority": 89,
   "index_patterns": [ "logs-endpoint-*" ],
   "version": 2019021801,
-  "mappings": {
-    "properties": {
-      "fingerprint_process_command_line_mm3": {
-        "type": "keyword"
+  "template": {
+    "mappings": {
+      "properties": {
+        "fingerprint_process_command_line_mm3": {
+          "type": "keyword"
+        }
       }
     }
   }
