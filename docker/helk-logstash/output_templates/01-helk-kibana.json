@@ -1,5 +1,5 @@
 {
-  "priority": 1000,
+  "priority": 999,
   "index_patterns": [
     ".kibana*"
   ],

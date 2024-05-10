@@ -21,12 +21,12 @@
         {
           "strings": {
             "match_mapping_type": "string",
-            "mapping": {
-              "ignore_above": 12048,
+            "mapping": {         
               "type": "text",
               "fields": {
                 "keyword": {
-                  "type": "keyword"
+                  "type": "keyword",
+                  "ignore_above": 12048
                 }
               }
             }
