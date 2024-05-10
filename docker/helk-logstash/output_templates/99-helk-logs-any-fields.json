@@ -1,5 +1,5 @@
 {
-  "order": 99,
+  "priority": 99,
   "index_patterns": [ "logs-*" ],
   "version": 2019090101,
   "mappings": {

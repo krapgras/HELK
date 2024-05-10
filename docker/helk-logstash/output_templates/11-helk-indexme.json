@@ -1,5 +1,5 @@
 {
-  "order": 11,
+  "priority": 11,
   "index_patterns": [ "indexme-*" ],
   "version": 2019073001,
   "settings": {

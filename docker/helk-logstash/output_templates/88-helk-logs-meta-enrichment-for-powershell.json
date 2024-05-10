@@ -1,5 +1,5 @@
 {
-  "order": 88,
+  "priority": 88,
   "index_patterns": [ "logs-endpoint-winevent-powershell-*" ],
   "version": 2019021901,
   "mappings": {

@@ -1,5 +1,5 @@
 {
-  "order": 11,
+  "priority": 11,
   "index_patterns": [ "indexme-zeek-*" ],
   "version": 2020050201,
   "settings": {

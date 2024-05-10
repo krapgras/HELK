@@ -1,5 +1,5 @@
 {
-  "order": 50,
+  "priority": 50,
   "index_patterns": [ "logs-endpoint-winevent-*" ],
   "version": 2019090101,
   "settings": {
