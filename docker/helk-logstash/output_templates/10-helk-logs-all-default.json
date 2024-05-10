@@ -1,8 +1,5 @@
 {
-  "order": 10,
-  "index_patterns": [ "logs-*" ],
-  "priority": 1000,
-  "version": 2020042001,
+  "index_patterns": ["logs-*"],
   "template": {
     "settings": {
       "index": {
@@ -10,11 +7,11 @@
           "ignore_malformed": true,
           "total_fields.limit": "10000",
           "coerce": true
-        }
-      },
-      "refresh_interval": "20s",
-      "number_of_replicas": 0,
-      "number_of_shards": 1
+        },
+        "refresh_interval": "20s",
+        "number_of_replicas": 0,
+        "number_of_shards": 1
+      }
     },
     "mappings": {
       "dynamic": "true",
@@ -92,5 +89,7 @@
         }
       }
     }
-  }
+  },
+  "priority": 10,
+  "version": 2020042001
 }
