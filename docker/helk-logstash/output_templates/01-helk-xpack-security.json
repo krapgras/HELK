@@ -4,10 +4,12 @@
     ".security*"
   ],
   "version": 2019111101,
-  "settings": {
-    "index": {
-      "priority": 100
-    },
-    "number_of_replicas": 1
+  "template": {
+    "settings": {
+      "index": {
+        "priority": 100
+      },
+      "number_of_replicas": 1
+    }
   }
 }
