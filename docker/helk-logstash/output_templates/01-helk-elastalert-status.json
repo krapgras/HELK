@@ -1,5 +1,5 @@
 {
-  "priority": 999,
+  "priority": 998,
   "index_patterns": [
     "elastalert_status*"
   ],
