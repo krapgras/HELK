@@ -4,15 +4,17 @@
     "elastalert_status*"
   ],
   "version": 2020050701,
-  "mappings": {
-    "properties": {
-      "match_body": {
-        "properties": {
-          "z_logstash_pipeline": {
-            "type": "keyword"
-          },
-          "etl_pipeline": {
-            "type": "keyword"
+  "template": {
+    "mappings": {
+      "properties": {
+        "match_body": {
+          "properties": {
+            "z_logstash_pipeline": {
+              "type": "keyword"
+            },
+            "etl_pipeline": {
+              "type": "keyword"
+            }
           }
         }
       }
