@@ -1,5 +1,5 @@
 {
-  "priority": 90,
+  "priority": 91,
   "index_patterns": [ "logs-*" ],
   "version": 2018080101,
   "template": {

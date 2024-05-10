@@ -1,5 +1,5 @@
 {
-  "priority": 89,
+  "priority": 91,
   "index_patterns": [ "logs-endpoint-winevent-powershell-*" ],
   "version": 2019021801,
   "template": {
