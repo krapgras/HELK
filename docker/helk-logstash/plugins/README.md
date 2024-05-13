@@ -75,9 +75,9 @@
 1. Install the logstash input plugins
     ```bash
     ./bin/logstash-plugin install \
+        logstash-integration-aws \
         logstash-input-azure_event_hubs \
         logstash-input-beats \
-        logstash-input-cloudwatch \
         logstash-input-elasticsearch \
         logstash-input-file \
         logstash-input-lumberjack \
@@ -94,7 +94,7 @@
 1. Install the logstash output plugins
     ```bash
     ./bin/logstash-plugin install \
-        logstash-output-cloudwatch \
+        logstash-integration-aws \
         logstash-output-csv \
         logstash-output-elasticsearch \
         logstash-output-email \
@@ -103,8 +103,6 @@
         logstash-output-google_pubsub \
         logstash-output-lumberjack \
         logstash-output-nagios \
-        logstash-output-s3 \
-        logstash-output-sns \
         logstash-output-stdout \
         logstash-output-syslog \
         logstash-output-tcp \
