@@ -13,6 +13,7 @@ LABEL description="Dockerfile base for the HELK Logstash."
 USER root
 RUN apt-get update -y
 RUN apt-get install zip -y
+RUN apt-get install shared-mime-info -y
 
 USER logstash
 COPY --chown=logstash:logstash config /usr/share/logstash/config
@@ -34,6 +35,7 @@ COPY --chown=logstash:logstash plugins/helk-offline-logstash-output-plugins-spli
 RUN zip -F /usr/share/logstash/plugins/helk-offline-logstash-input-plugins-split.zip --out /usr/share/logstash/plugins/helk-offline-logstash-input-plugins.zip
 RUN zip -F /usr/share/logstash/plugins/helk-offline-logstash-codec_and_filter_plugins-split.zip --out /usr/share/logstash/plugins/helk-offline-logstash-codec_and_filter_plugins.zip
 RUN zip -F /usr/share/logstash/plugins/helk-offline-logstash-output-plugins-split.zip --out /usr/share/logstash/plugins/helk-offline-logstash-output-plugins.zip
+RUN bin/ruby -S gem install mimemagic -v '>= 0.3.7'
 RUN logstash-plugin update \
     && logstash-plugin install file:///usr/share/logstash/plugins/helk-offline-logstash-codec_and_filter_plugins.zip \
     && logstash-plugin install file:///usr/share/logstash/plugins/helk-offline-logstash-input-plugins.zip \
