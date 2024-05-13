@@ -7,7 +7,7 @@
 # License: GPL-3.0
 
 HELK_BUILD_VERSION="v0.2.1-alpha09122023"
-HELK_ELK_VERSION="8.13.3"
+HELK_ELK_VERSION="8.13.4"
 SUBSCRIPTION_CHOICE="basic"
 
 # *********** Helk log tagging variables ***************

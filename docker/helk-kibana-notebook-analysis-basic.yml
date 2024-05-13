@@ -35,7 +35,7 @@ services:
     networks:
       helk:
   helk-logstash:
-    image: docker.elastic.co/logstash/logstash:8.13.3
+    image: docker.elastic.co/logstash/logstash:8.13.4
     container_name: helk-logstash
     logging:
       driver: "json-file"
