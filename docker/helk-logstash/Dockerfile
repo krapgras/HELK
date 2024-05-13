@@ -22,14 +22,14 @@ ENV plugins_time_file="/usr/share/logstash/helk-plugins-updated-timestamp.txt"
 RUN printf "%s" "$(date +"%Y-%m-%d %T")" > "${plugins_time_file}"
 RUN chown logstash:logstash "${plugins_time_file}"
 
-COPY --chown=logstash:logstash plugins/helk-offline-logstash-codec_and_filter_plugins.zip /usr/share/logstash/plugins/helk-offline-logstash-codec_and_filter_plugins-split.zip
-COPY --chown=logstash:logstash plugins/helk-offline-logstash-codec_and_filter_plugins.zip /usr/share/logstash/plugins/helk-offline-logstash-codec_and_filter_plugins-split.z01
-COPY --chown=logstash:logstash plugins/helk-offline-logstash-input-plugins.zip /usr/share/logstash/plugins/helk-offline-logstash-input-plugins-split.zip
-COPY --chown=logstash:logstash plugins/helk-offline-logstash-input-plugins.zip /usr/share/logstash/plugins/helk-offline-logstash-input-plugins-split.z01
-COPY --chown=logstash:logstash plugins/helk-offline-logstash-input-plugins.zip /usr/share/logstash/plugins/helk-offline-logstash-input-plugins-split.z02
-COPY --chown=logstash:logstash plugins/helk-offline-logstash-output-plugins.zip /usr/share/logstash/plugins/helk-offline-logstash-output-plugins-split.zip
-COPY --chown=logstash:logstash plugins/helk-offline-logstash-output-plugins.zip /usr/share/logstash/plugins/helk-offline-logstash-output-plugins-split.z01
-COPY --chown=logstash:logstash plugins/helk-offline-logstash-output-plugins.zip /usr/share/logstash/plugins/helk-offline-logstash-output-plugins-split.z02
+COPY --chown=logstash:logstash plugins/helk-offline-logstash-codec_and_filter_plugins-split.zip /usr/share/logstash/plugins/helk-offline-logstash-codec_and_filter_plugins-split.zip
+COPY --chown=logstash:logstash plugins/helk-offline-logstash-codec_and_filter_plugins-split.z01 /usr/share/logstash/plugins/helk-offline-logstash-codec_and_filter_plugins-split.z01
+COPY --chown=logstash:logstash plugins/helk-offline-logstash-input-plugins-split.zip /usr/share/logstash/plugins/helk-offline-logstash-input-plugins-split.zip
+COPY --chown=logstash:logstash plugins/helk-offline-logstash-input-plugins-split.z01 /usr/share/logstash/plugins/helk-offline-logstash-input-plugins-split.z01
+COPY --chown=logstash:logstash plugins/helk-offline-logstash-input-plugins-split.z02 /usr/share/logstash/plugins/helk-offline-logstash-input-plugins-split.z02
+COPY --chown=logstash:logstash plugins/helk-offline-logstash-output-plugins-split.zip /usr/share/logstash/plugins/helk-offline-logstash-output-plugins-split.zip
+COPY --chown=logstash:logstash plugins/helk-offline-logstash-output-plugins-split.z01 /usr/share/logstash/plugins/helk-offline-logstash-output-plugins-split.z01
+COPY --chown=logstash:logstash plugins/helk-offline-logstash-output-plugins-split.z02 /usr/share/logstash/plugins/helk-offline-logstash-output-plugins-split.z02
 
 RUN zip -F /usr/share/logstash/plugins/helk-offline-logstash-input-plugins-split.zip --out /usr/share/logstash/plugins/helk-offline-logstash-input-plugins.zip
 RUN zip -F /usr/share/logstash/plugins/helk-offline-logstash-codec_and_filter_plugins-split.zip --out /usr/share/logstash/plugins/helk-offline-logstash-codec_and_filter_plugins.zip
