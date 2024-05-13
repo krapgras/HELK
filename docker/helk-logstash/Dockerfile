@@ -11,8 +11,8 @@ LABEL maintainer="Roberto Rodriguez @Cyb3rWard0g"
 LABEL description="Dockerfile base for the HELK Logstash."
 
 USER root
-RUN yum update -y
-RUN yum install zip -y
+RUN apt-get update -y
+RUN apt-get install zip -y
 
 USER logstash
 COPY --chown=logstash:logstash config /usr/share/logstash/config
