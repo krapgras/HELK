@@ -3,15 +3,15 @@
 # Author: Roberto Rodriguez (@Cyb3rWard0g)
 # License: GPL-3.0
 
-FROM otrf/helk-base:0.0.4
+FROM helk-base
 LABEL maintainer="Roberto Rodriguez @Cyb3rWard0g"
 LABEL description="Dockerfile base for HELK Spark."
 
 ENV DEBIAN_FRONTEND noninteractive
 
 # *********** Spark Env Variables ***************
-ENV SPARK_VERSION=2.4.5 \
-  APACHE_HADOOP_VERSION=2.7 \
+ENV SPARK_VERSION=3.5.1 \
+  APACHE_HADOOP_VERSION=3 \
   SPARK_HOME=/opt/helk/spark \
   SPARK_LOGS=$SPARK_HOME/logs \
   SPARK_GID=710 \
