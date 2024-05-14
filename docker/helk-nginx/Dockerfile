@@ -7,7 +7,7 @@
 # https://cyberwardog.blogspot.com/2017/02/setting-up-pentesting-i-mean-threat_98.html
 # https://github.com/spujadas/elk-docker/blob/master/Dockerfile
 
-FROM nginx:1.17.9
+FROM nginx:mainline
 LABEL maintainer="Roberto Rodriguez @Cyb3rWard0g"
 LABEL description="Dockerfile base for the HELK Nginx."
 
@@ -23,6 +23,7 @@ RUN apt-get -qy clean \
 
 # *********** Adding HELK scripts and files to Container ***************
 COPY scripts/nginx-entrypoint.sh /opt/helk/scripts/
+COPY htpasswd.users /etc/nginx/htpasswd.users
 RUN chmod 644 /etc/nginx/htpasswd.users
 RUN chmod +x /opt/helk/scripts/nginx-entrypoint.sh
 
