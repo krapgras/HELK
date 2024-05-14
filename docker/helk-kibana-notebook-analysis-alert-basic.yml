@@ -1,6 +1,9 @@
 version: '3.5'
 
 services:
+  helk-base:
+    build: helk-base/
+    container_name: helk-base
   helk-elasticsearch:
     build: helk-elasticsearch/
     container_name: helk-elasticsearch
@@ -114,6 +117,11 @@ services:
       - helk-kibana
     networks:
       helk:
+  helk-kafka-base:
+    build: helk-kafka-base/
+    container_name: helk-kafka-base
+    depends_on:
+      - helk-base
   helk-zookeeper:
     build: helk-zookeeper/
     container_name: helk-zookeeper
@@ -125,6 +133,7 @@ services:
     restart: always
     depends_on:
       - helk-logstash
+      - helk-kafka-base
     networks:
       helk:
   helk-kafka-broker:
@@ -211,6 +220,11 @@ services:
       - helk-logstash
     networks:
       helk:
+  helk-spark-base:
+    build: helk-spark-base/
+    container_name: helk-spark-base
+    depends_on:
+      - helk-base
   helk-spark-master:
     build: helk-spark-master/
     container_name: helk-spark-master
@@ -227,6 +241,7 @@ services:
     restart: always
     depends_on:
       - helk-logstash
+      - helk-spark-base
     networks:
       helk:
   helk-spark-worker:
@@ -258,6 +273,7 @@ services:
     restart: always
     depends_on:
       - helk-logstash
+      - helk-base
     environment:
       ES_HOST: helk-elasticsearch
       ES_PORT: 9200
