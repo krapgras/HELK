@@ -3,7 +3,7 @@
 # Author: Roberto Rodriguez (@Cyb3rWard0g)
 # License: GPL-3.0
 
-FROM helk-kafka-base
+FROM docker_helk-kafka-base
 LABEL maintainer="Roberto Rodriguez @Cyb3rWard0g"
 LABEL description="Dockerfile base for the HELK Kafka Zookeeper."
 
