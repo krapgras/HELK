@@ -26,7 +26,7 @@ RUN mkdir ${SPARK_HOME}/.conda \
   && conda config --system --prepend channels conda-forge \
   && conda install --quiet --yes conda-build \
   && conda install --quiet --yes \
-    'python=3.7.5' \
+    'python=3.12.2' \
   && conda update --all --quiet --yes \
   # *********** Clean *****************
   && conda clean -tipcy \
