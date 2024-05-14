@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   helk-elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+    build: helk-elasticsearch/
     container_name: helk-elasticsearch
     logging:
       driver: "json-file"
@@ -71,7 +71,7 @@ services:
     networks:
       helk:
   helk-kibana:
-    image: docker.elastic.co/kibana/kibana:8.13.4
+    build: helk-kibana/
     container_name: helk-kibana
     logging:
       driver: "json-file"
@@ -92,7 +92,7 @@ services:
     networks:
       helk:
   helk-nginx:
-    image: otrf/helk-nginx:0.3.0
+    build: helk-nginx/
     container_name: helk-nginx
     logging:
       driver: "json-file"
@@ -115,7 +115,7 @@ services:
     networks:
       helk:
   helk-zookeeper:
-    image: otrf/helk-zookeeper:2.4.0
+    build: helk-zookeeper/
     container_name: helk-zookeeper
     logging:
       driver: "json-file"
@@ -128,7 +128,7 @@ services:
     networks:
       helk:
   helk-kafka-broker:
-    image: otrf/helk-kafka-broker:2.4.0
+    build: helk-kafka-broker/
     container_name: helk-kafka-broker
     logging:
       driver: "json-file"
@@ -153,7 +153,7 @@ services:
     networks:
       helk:
   helk-ksql-server:
-    image: confluentinc/ksqldb-server:latest
+    build: helk-ksql-server/
     container_name: helk-ksql-server
     logging:
       driver: "json-file"
@@ -178,7 +178,7 @@ services:
     networks:
       helk:
   helk-ksql-cli:
-    image: confluentinc/ksqldb-cli:latest
+    build: helk-ksql-cli/
     container_name: helk-ksql-cli
     logging:
       driver: "json-file"
@@ -212,7 +212,7 @@ services:
     networks:
       helk:
   helk-spark-master:
-    image: otrf/helk-spark-master:2.4.5
+    build: helk-spark-master/
     container_name: helk-spark-master
     logging:
       driver: "json-file"
@@ -230,7 +230,7 @@ services:
     networks:
       helk:
   helk-spark-worker:
-    image: otrf/helk-spark-worker:2.4.5
+    build: helk-spark-worker/
     container_name: helk-spark-worker
     logging:
       driver: "json-file"
