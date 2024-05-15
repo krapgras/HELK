@@ -272,7 +272,7 @@ install_docker() {
 install_docker_compose() {
   echo "$HELK_INFO_TAG Installing docker-compose.."
   # Freeze docker-compose at version 1.27.4 due to glibc version requirements in 1.28 not matching recommended distros for HELK
-  curl -L https://github.com/docker/compose/releases/download/1.27.4/docker-compose-"$(uname -s)"-"$(uname -m)" -o /usr/local/bin/docker-compose >>$LOGFILE 2>&1
+  curl -L https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-"$(uname -s)"-"$(uname -m)" -o /usr/local/bin/docker-compose >>$LOGFILE 2>&1
   chmod +x /usr/local/bin/docker-compose >>$LOGFILE 2>&1
   if [ "$LSB_DIST" == "centos" ]; then
     # Link docker-compose so can be used with sudo
