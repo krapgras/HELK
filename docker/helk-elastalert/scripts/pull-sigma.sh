@@ -166,7 +166,7 @@ for rule in rules/apt/* ; do
         continue
     else
         echo "[+++] Processing apt rule: $rule .."
-        sigma convert-t elastalert -c tools/config/generic/sysmon.yml -c "${helk_sigmac}" --backend-option timestamp_field=etl_processed_time -o "${ESALERT_HOME}"/rules/sigma_sysmon_apt_"$(basename "${rule}")" "$rule"
+        sigma convert -t elastalert -c tools/config/generic/sysmon.yml -c "${helk_sigmac}" --backend-option timestamp_field=etl_processed_time -o "${ESALERT_HOME}"/rules/sigma_sysmon_apt_"$(basename "${rule}")" "$rule"
         # Give unique rule name for sysmon
         sed -i 's/^name: /name: Sysmon_/' "${ESALERT_HOME}"/rules/sigma_sysmon_apt_"$(basename "${rule}")"
         sigma convert -t elastalert -c tools/config/generic/windows-audit.yml -c "${helk_sigmac}" --backend-option timestamp_field=etl_processed_time -o "${ESALERT_HOME}"/rules/sigma_apt_"$(basename "${rule}")" "$rule"

@@ -31,7 +31,7 @@ RUN mkdir -p "$ZOO_CONF_DIR" "$ZOO_DATA_LOG_DIR" "$ZOO_DATA_DIR" "$ZOO_LOGS_PATH
 
 USER ${KAFKA_USER}
 
-EXPOSE 2181 2888 3888
+EXPOSE 2181 2888 3888 9092
 WORKDIR "/opt/helk/zookeeper/scripts/"
 ENTRYPOINT ["./zookeeper-entrypoint.sh"]
 CMD ["/bin/bash","-c","/opt/helk/kafka/bin/zookeeper-server-start.sh /opt/helk/zookeeper/conf/zookeeper.properties"]
