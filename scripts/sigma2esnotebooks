@@ -85,7 +85,7 @@ for sfile in sigmaFiles:
     except yaml.YAMLError as e:
         print("  [!!] Script could not parse the yaml contents of {} and failed with the following error: {}".format(sfile, e))
     # Testing if sigmac can translate sigma rule.
-    sigmacCommand = ["sigmac", "-t", SIGMACTARGET, "-c", FIELDMAPPINGSCONFIG, "{}".format(sfile)]
+    sigmacCommand = ["sigma", "convert", "-t", SIGMACTARGET, "-c", FIELDMAPPINGSCONFIG, "{}".format(sfile)]
     p = subprocess.run(sigmacCommand, stdout=subprocess.PIPE, text=True)
     detection = p.stdout.splitlines()
     # If there is an error translating rule, loop moves to the next iteration

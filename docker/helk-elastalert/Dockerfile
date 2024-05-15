@@ -22,6 +22,7 @@ RUN apt update && apt -y upgrade \
     && pip install setuptools wheel \
     && python setup.py sdist bdist_wheel \
     && pip install ${ESALERT_HOME}/dist/*.tar.gz \
+    && pip install sigma-cli \
     && apt -y remove gcc libffi-dev \
     && apt -y autoremove \
     # ********* Download SIGMA *******************
