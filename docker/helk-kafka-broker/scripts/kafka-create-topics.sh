@@ -19,7 +19,7 @@ IFS=', ' read -r -a temas <<< "$KAFKA_CREATE_TOPICS"
 
 for t in ${temas[@]}; do 
   echo "[HELK-DOCKER-INSTALLATION-INFO] Creating Kafka ${t} Topic.."
-  ${KAFKA_HOME}/bin/kafka-topics.sh --create --zookeeper ${ZOOKEEPER_NAME}:2181 --replication-factor ${REPLICATION_FACTOR} --partitions 1 --topic ${t} --if-not-exists
+  ${KAFKA_HOME}/bin/kafka-topics.sh --create --bootstrap-server ${ZOOKEEPER_NAME}:2181 --replication-factor ${REPLICATION_FACTOR} --partitions 1 --topic ${t} --if-not-exists
 done
 
 wait
