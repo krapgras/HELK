@@ -7,8 +7,8 @@ FROM python:3.12-slim
 LABEL maintainer="Ignace De Cock @Krapgras"
 LABEL description="Dockerfile base for the HELK elastalert2."
 
-ENV ESALERT_GID=910
-ENV ESALERT_UID=910
+ENV ESALERT_GID=1000
+ENV ESALERT_UID=1000
 ENV ESALERT_USER=elastalertuser
 ENV ESALERT_HOME=/etc/elastalert
 ENV ESALERT_SIGMA_HOME=/opt/sigma

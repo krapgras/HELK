@@ -25,6 +25,7 @@ function importFile
     curl -sk -XPOST -u "${ELASTICSEARCH_CREDS}" \
         "${KIBANA_HOST}/api/saved_objects/_import?overwrite=true" \
         -H "kbn-xsrf: true" \
+        -H "Content-Type: multipart/form-data" \
         --form file=@"${file}"
     )
     result=$(echo "${response}" | grep -w "success" | cut -d ',' -f 1 | cut -d ':' -f 2 | sed -E 's/[^-[:alnum:]]//g')

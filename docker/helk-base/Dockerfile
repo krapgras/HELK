@@ -4,7 +4,7 @@
 # License: GPL-3.0
 
 FROM phusion/baseimage:noble-1.0.0
-LABEL maintainer="Roberto Rodriguez @Cyb3rWard0g"
+LABEL maintainer="Ignace De Cock @Krapgras"
 LABEL description="Dockerfile HELK Base Image.."
 
 ENV DEBIAN_FRONTEND noninteractive
