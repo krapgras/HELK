@@ -14,8 +14,8 @@ ENV KAFKA_SCRIPT=$KAFKA_HOME/bin/kafka-server-start.sh
 ENV KAFKA_CONFIG=$KAFKA_HOME/config/server.properties
 
 RUN mv $KAFKA_CONFIG ${KAFKA_HOME}/config/backup_server.properties
-COPY ../helk-kafka-broker/server.properties ${KAFKA_HOME}/config/
-COPY ../helk-kafka-broker/scripts ${KAFKA_HOME}/scripts
+COPY server.properties ${KAFKA_HOME}/config/
+COPY scripts ${KAFKA_HOME}/scripts
 RUN chmod +x ${KAFKA_HOME}/scripts/kafka-entrypoint.sh \
     && chmod +x ${KAFKA_HOME}/scripts/kafka-create-topics.sh
 
