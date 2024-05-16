@@ -138,6 +138,7 @@ services:
       KAFKA_CLUSTER_ID: q1Sh-9_ISia_zwGINzRvyQ
       KAFKA_ROLE: controller
       KAFKA_NODE_ID: 1
+      KAFKA_BROKER_NAME: helk-kafka-broker
       KAFKA_BROKER_PORT: 9092
       REPLICATION_FACTOR: 1
       ADVERTISED_LISTENER: ${ADVERTISED_LISTENER}
