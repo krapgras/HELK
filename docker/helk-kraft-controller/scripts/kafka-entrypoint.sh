@@ -59,7 +59,7 @@ sed -i "s/^process\.roles\=.*$/process.roles=${KAFKA_ROLE}/g" ${KAFKA_HOME}/conf
 
 if [[ "$KAFKA_ROLE" == "controller" ]]
 then
-  sed -i "s/^advertised\.listeners\=PLAINTEXT:\/\/.*$//g"
+  sed -i "s/^advertised\.listeners\=PLAINTEXT:\/\/.*$//g" ${KAFKA_HOME}/config/server.properties
   sed -i "s/^listeners\=PLAINTEXT:\/\/.*$/listeners\=CONTROLLER:\/\/:9093/g" ${KAFKA_HOME}/config/server.properties
   sed -i "s/^listeners\=PLAINTEXT:\/\/.*$/listeners=CONTROLLER:\/\/:9093/g" ${KAFKA_HOME}/config/server.properties
 else
