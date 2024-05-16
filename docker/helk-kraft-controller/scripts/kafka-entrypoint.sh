@@ -72,10 +72,4 @@ echo "[HELK-DOCKER-INSTALLATION-INFO] Create Kafka metadata properties file.."
 
 ${KAFKA_HOME}/bin/kafka-storage.sh format -t "${KAFKA_CLUSTER_ID}" -c "${KAFKA_HOME}/config/server.properties"
 
-if [[ -z "$KAFKA_CREATE_TOPICS" ]]; then
-  KAFKA_CREATE_TOPICS=winlogbeat
-fi
-echo "[HELK-DOCKER-INSTALLATION-INFO] Creating the following kafka topics: $KAFKA_CREATE_TOPICS"
-./kafka-create-topics.sh &
-
 exec "$@"
