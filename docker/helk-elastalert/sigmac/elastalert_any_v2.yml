@@ -12,7 +12,20 @@ postprocessing:
    
       {% macro index() -%}
       {% if rule.logsource.product == 'windows' -%}
-      {% set index = 'winlogbeat-*' -%}
+      {% if rule.logsource.service == 'application' -%}
+      {% set index = 'logs-endpoint-winevent-application-*' -%}
+      {% elif rule.logsource.service == 'security' -%}
+      {% set index = 'logs-endpoint-winevent-security-*' -%}
+      {% elif rule.logsource.category == 'sysmon' or rule.logsource.service == 'sysmon' -%}
+      {% set index = 'logs-endpoint-winevent-sysmon-*' -%}
+      {% elif rule.logsource.service == 'system' -%}
+      {% set index = 'logs-endpoint-winevent-system-*' -%}  
+      {% elif rule.logsource.category == 'wmi_event' or rule.logsource.service == 'wmi' -%}
+      {% set index = 'logs-endpoint-winevent-wmiactivity-*' -%}
+      {% elif rule.logsource.category in ['ps_classic_start,'ps_module','ps_script'] or rule.logsource.service in ['powershell','powershell-classic'] -%}
+      {% set index = 'logs-endpoint-winevent-powershell-*' -%}
+      {% endif -%}
+      {% set index = 'logs-endpoint-winevent-*' -%}
       {% elif rule.logsource.product == 'linux' -%}
       {% set index = 'linux-*' -%}
       {% else -%}

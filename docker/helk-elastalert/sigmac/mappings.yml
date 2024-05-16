@@ -1,0 +1,427 @@
+name: transformation_demo
+priority: 100
+transformations:
+    - id: Object_AccessList_mapping
+      type: field_name_mapping
+      mapping:
+        - AccessList: object_access_list
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["4656", "4659", "4660","4661","4662","4663"]
+    - id: User_AccessList_mapping
+      type: field_name_mapping
+      mapping:
+        - AccessList: user_access_list
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["5140", "5142", "5143","5144","5145"]
+    - id: Object_Accessmask_mapping
+      type: field_name_mapping
+      mapping:
+        - AccessMask: object_access_mask
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["4656", "4659", "4660","4661","4662","4663","4674"]
+    - id: Share_Accessmask_mapping
+      type: field_name_mapping
+      mapping:
+        - AccessMask: share_access_mask
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["5140", "5142", "5143","5144","5145"]
+    - id: Configuration_mapping
+      type: field_name_mapping
+      mapping:
+        - Configuration: sysmon_configuration
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["16"]
+    - id: Destination_mapping
+      type: field_name_mapping
+      mapping:
+        - Destination: wmi_consumer_destination
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["20"]
+    - id: Details_mapping
+      type: field_name_mapping
+      mapping:
+        - Details: registry_key_value
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["13"]
+    - id: DisabledPrivilegeList_mapping
+      type: field_name_mapping
+      mapping:
+        - DisabledPrivilegeList: target_user_disabled_privilege_list
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["4703"]
+    - id: EnabledPrivilegeList_mapping
+      type: field_name_mapping
+      mapping:
+        - EnabledPrivilegeList: target_user_enabled_privilege_list
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["4703"]
+    - id: EventNamespace_mapping
+      type: field_name_mapping
+      mapping:
+        - EventNamespace: wmi_namespace
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["19"]
+    - id: Filter_mapping
+      type: field_name_mapping
+      mapping:
+        - Filter: wmi_filter_path
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["21"]
+    - id: ImageLoaded_Driver_mapping
+      type: field_name_mapping
+      mapping:
+        - ImageLoaded: driver_loaded
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["6"]
+    - id: ImageLoaded_Module_mapping
+      type: field_name_mapping
+      mapping:
+        - ImageLoaded: module_loaded
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["7"]
+    - id: Initiated_mapping
+      type: field_name_mapping
+      mapping:
+        - Initiated: network_initiated
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["3"]
+    - id: IntegrityLevel_mapping
+      type: field_name_mapping
+      mapping:
+        - IntegrityLevel: process_integrity_level
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["1"]
+    - id: IpAddresses_mapping
+      type: field_name_mapping
+      mapping:
+        - IpAddresses: ip_addresses
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["5168"]
+    - id: Name_Filter_mapping
+      type: field_name_mapping
+      mapping:
+        - Name: wmi_filter_name
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["19"]
+    - id: Name_consumer_mapping
+      type: field_name_mapping
+      mapping:
+        - Name: wmi_consumer_name
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["20"]
+    - id: NewName_mapping
+      type: field_name_mapping
+      mapping:
+        - NewName: registry_key_new_name
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["14"]
+    - id: Operation_wmi_mapping
+      type: field_name_mapping
+      mapping:
+        - Operation: wmi_operation
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["19", "20","21"]
+    - id: Operation_key_mapping
+      type: field_name_mapping
+      mapping:
+        - Operation: key_operation
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["5058", "5059","5061"]
+    - id: OperationType_object_mapping
+      type: field_name_mapping
+      mapping:
+        - OperationType: object_operation_type
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["4657", "4660","4661","4662","4663"]
+    - id: OperationType_dsoperation_mapping
+      type: field_name_mapping
+      mapping:
+        - OperationType: dsoperation_type
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["5136", "5137","5138","5139","5141","5169","5170"]
+    - id: Protocol_mapping
+      type: field_name_mapping
+      mapping:
+        - Protocol: network_protocol
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["3", "5152","5154","5156","5157","5158"]
+    - id: Query_mapping
+      type: field_name_mapping
+      mapping:
+        - Query: wmi_query
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["19"]
+    - id: SchemaVersion_mapping
+      type: field_name_mapping
+      mapping:
+        - SchemaVersion: sysmon_schema_version
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["4"]
+    - id: State_Service_mapping
+      type: field_name_mapping
+      mapping:
+        - State: service_state
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["4"]
+    - id: State_Sysmon_mapping
+      type: field_name_mapping
+      mapping:
+        - State: sysmon_configuration_state
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["16"]
+    - id: subject_user_name_mapping
+      type: field_name_mapping
+      mapping:
+        - SubjectUserName: user_name
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["4611","4616","4648","4656","4657","4658","4659","4660","4661","4662","4663","4664","4670","4672","4673","4674","4688","4689","4690","4692","4693","4694","4695","4696","4697","4698","4699","4700","4701","4702","4703","4704","4715","4719","4720","4722","4723","4724","4725","4726","4727","4728","4729","4730","4731","4732","4733","4734","4735","4737","4738","4741","4742","4743","4744","4745","4746","4747","4748","4749","4750","4751","4752","4753","4754","4755","4756","4757","4758","4759","4760","4761","4762","4763","4764","4781","4782","4793","4794","4797","4798","4799","4817","4882","4883","4902","4904","4905","4906","4907","4908","4912","4964","4985","5051","5058","5059","5061","5136","5137","5138","5139","5140","5141","5142","5143","5144","5145","5168","5169","5170","5376","5377","5378","5379","5632","5633","6416"]
+    - id: subject_user_reporter_mapping
+      type: field_name_mapping
+      mapping:
+        - SubjectUserName: user_reporter_name
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["4624","4625","4626","4627","4649","4740","4767"]
+    - id: TargetServer_mapping
+      type: field_name_mapping
+      mapping:
+        - TargetServer: dst_original_value
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["5738"]
+    - id: Type_consumer_mapping
+      type: field_name_mapping
+      mapping:
+        - Type: wmi_consumer_type
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["20"]
+    - id: Type_credentials_mapping
+      type: field_name_mapping
+      mapping:
+        - Type: credentials_read_type
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["5379"]
+    - id: Value_mapping
+      type: field_name_mapping
+      mapping:
+        - Value: dst_ip_addr
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["1102","1104"]
+    - id: Version_mapping
+      type: field_name_mapping
+      mapping:
+        - Version: sysmon_version
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["4"]
+    - id: PrivilegeList_user_mapping
+      type: field_name_mapping
+      mapping:
+        - PrivilegeList: user_privilege_list
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["4720","4722","4723","4724","4725","4726","4727","4728","4729","4730","4731","4732","4733","4734","4735","4737","4738","4741","4742","4743","4744","4745","4746","4747","4748","4749","4750","4751","4752","4753","4754","4755","4756","4757","4758","4759","4760","4761","4762","4763","4764"]
+    - id: PrivilegeList_object_mapping
+      type: field_name_mapping
+      mapping:
+        - PrivilegeList: object_privilege_list
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["4656","4660","4661","4662","4663","4674"]
+    - id: PrivilegeList_logon_mapping
+      type: field_name_mapping
+      mapping:
+        - PrivilegeList: logon_privilege_list
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["4672"]
+    - id: PrivilegeList_service_mapping
+      type: field_name_mapping
+      mapping:
+        - PrivilegeList: service_privilege_list
+      rule_conditions:
+        - type: field 
+          field: EventID 
+          values: ["4673"]
+    - id: All_mapping
+      type: field_name_mapping
+      mapping:
+        - AccountName: user_name
+        - AllowedToDelegateTo: target_user_allowed_to_delegate
+        - AppCorrelationID: dsoperation_app_correlation_id
+        - AttributeLDAPDisplayName: dsobject_attribute_name
+        - AttributeSyntaxOID: dsobject_attribute_type
+        - AttributeValue: dsobject_attribute_value
+        - AuditPolicyChanges: policy_changes
+        - AuthenticationPackageName: logon_authentication_package
+        - CallingProcessName: process_path
+        - CallTrace: process_call_trace
+        - ClientAddress: src_ip_addr
+        - ClientIPAddress: src_ip_addr
+        - ClientIP: src_original_value
+        - CommandLine: process_command_line
+        - Company: file_company
+        - ComputerName: host_name
+        - ConnectedViaIPAddress: dst_nat_ip_addr
+        - CurrentDirectory: process_current_directory
+        - Description: file_description
+        - DestAddress: dst_ip_addr
+        - DestinationHostname: dst_host_name
+        - DestinationIp: dst_ip_addr
+        - DestinationPort: dst_port
+        - DestinationPortName: dst_port_name
+        - DestinationIsIpv6: dst_is_ipv6
+        - Device: device_name
+        - DSName: host_domain
+        - DSType: dsobject_domain_type
+        - EngineVersion: powershell.engine.version
+        - EventID: event_id
+        - EventType: event_category_type
+        - FailureCode: ticket_failure_code
+        - FileName: file_name
+        - FileVersion: file_version
+        - GrantedAccess: process_granted_access
+        - GroupName: group_name
+        - GroupSid: group_sid
+        - HiveName: hive_name
+        - HostVersion: powershell.host.version
+        - Image: process_path
+        - Imphash: hash_imphash
+        - ipAddress: dst_ip_addr
+        - IpAddress: src_original_value
+        - IPString: src_ip_addr
+        - LaunchedViaIPAddress: dst_ip_addr
+        - LogonProcessName: logon_process_name
+        - LogonType: logon_type
+        - MachineIpAddress: dst_ip_addr
+        - MachineName: host_name
+        - NewObjectDN: dsobject_new_dn
+        - NewProcessName: process_path
+        - ObjectClass: dsobject_class
+        - ObjectDN: dsobject_dn
+        - ObjectGUID: dsobject_guid
+        - ObjectName: object_name
+        - ObjectServer: object_server
+        - ObjectType: object_type
+        - ObjectValueName: object_value_name
+        - OldObjectDN: dsobject_old_dn
+        - OpCorrelationID: dsoperation_correlation_id
+        - OriginalFileName: file_name_original
+        - ParentImage: process_parent_path
+        - ParentProcessName: process_parent_path
+        - PasswordLastSet: user_attribute_password_lastset
+        - Path: process_path
+        - ParentCommandLine: process_parent_command_line
+        - PipeName: pipe_name
+        - ProcessCommandLine: process_command_line
+        - ProcessName: process_path
+        - processPath: process_path
+        - ProcessPath: process_path
+        - Product: file_product
+        - Properties: object_properties
+        - RelativeTargetName: share_relative_target_name
+        - SamAccountName: user_attribute_samaccount_name
+        - ServiceFileName: service_image_path
+        - ServiceName: service_name
+        - ShareName: share_name
+        - Signature: signature
+        - SignatureStatus: signature_status
+        - Signed: signed
+        - Source: source_name
+        - SourceAddress: src_ip_addr
+        - SourceHostname: src_host_name
+        - SourceIsIpv6: src_is_ipv6
+        - SourceImage: process_path
+        - SourceIp: src_ip_addr
+        - SourcePort: src_port
+        - SourcePortName: src_port_name
+        - StartAddress: thread_start_address
+        - StartFunction: thread_start_function
+        - StartModule: thread_start_module
+        - Status: event_status
+        - SubjectDomainName: user_domain
+        - TargetServerName: target_server_name
+        - TaskName: task_name
+        - TicketEncryptionType: ticket_encryption_type
+        - TicketOptions: ticket_options
+        - TargetFilename: file_name
+        - TargetImage: target_process_path
+        - TargetProcessAddress: thread_start_address
+        - TargetObject: registry_key_path
+        - TransactionId: object_transaction_guid
+        - User: user_account
+        - UserName: user_name
+        - Workstation: src_host_name
+        - WorkstationName: src_host_name
+        - UtcTime: '@timestamp'
+        - EventTime: '@timestamp'
