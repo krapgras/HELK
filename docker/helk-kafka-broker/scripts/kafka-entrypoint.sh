@@ -54,7 +54,7 @@ echo "[HELK-DOCKER-INSTALLATION-INFO] Setting Advertised listener value to $ADVE
 echo "[HELK-DOCKER-INSTALLATION-INFO] Updating Kafka server properties file.."
 
 sed -i "s/^node\.id\=.*$/node.id=${KAFKA_NODE_ID}/g" ${KAFKA_HOME}/config/server.properties
-sed -i "s/^log.retention.hours\=.*$/log.retention.hours\=$LOG_RETENTION_HOURS/g" ${KAFKA_HOME}/config/server.properties
+sed -i "s/^log\.retention\.hours\=.*$/log\.retention\.hours\=${LOG_RETENTION_HOURS}/g" ${KAFKA_HOME}/config/server.properties
 sed -i "s/^process\.roles\=.*$/process.roles=${KAFKA_ROLE}/g" ${KAFKA_HOME}/config/server.properties
 
 if [["$KAFKA_ROLE" == "controller"]]
@@ -66,6 +66,7 @@ else
   sed -i "s/^listeners\=PLAINTEXT:\/\/.*$/listeners\=PLAINTEXT:\/\/${KAFKA_BROKER_NAME}\:${KAFKA_BROKER_PORT}/g" ${KAFKA_HOME}/config/server.properties
   sed -i "s/^listeners\=PLAINTEXT:\/\/.*$/listeners=PLAINTEXT:\/\/${KAFKA_BROKER_NAME}\:${KAFKA_BROKER_PORT}/g" ${KAFKA_HOME}/config/server.properties
   sed -i "s/^advertised\.listeners\=PLAINTEXT:\/\/.*$/advertised\.listeners\=PLAINTEXT\:\/\/${ADVERTISED_LISTENER}\:${KAFKA_BROKER_PORT}/d" ${KAFKA_HOME}/config/server.properties
+  sed -i "s/^controller\.quorum\.voters\=.*$/controller\.quorum\.voters\=1@${CONTROLLER_NAME}\:9093/g" ${KAFKA_HOME}/config/server.properties
 fi
 
 echo "[HELK-DOCKER-INSTALLATION-INFO] Create Kafka metadata properties file.."

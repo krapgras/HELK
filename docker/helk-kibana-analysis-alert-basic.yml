@@ -147,6 +147,7 @@ services:
       LOG_RETENTION_HOURS: 4
     ports:
       - "9092:9092"
+      - "9093:9093"
     networks:
       helk:
   helk-kafka-broker:

@@ -147,6 +147,7 @@ services:
       LOG_RETENTION_HOURS: 4
     ports:
       - "9092:9092"
+      - "9093:9093"
     networks:
       helk:
   helk-kafka-broker:
@@ -172,8 +173,8 @@ services:
       KAFKA_CREATE_TOPICS: winlogbeat, winevent, SYSMON_JOIN, filebeat, zeek
       KAFKA_HEAP_OPTS: -Xmx1G -Xms256M
       LOG_RETENTION_HOURS: 4
-    ports:
-      - "9092:9092"
+#    ports:
+#      - "9092:9092"
     networks:
       helk:
   helk-ksql-server:
