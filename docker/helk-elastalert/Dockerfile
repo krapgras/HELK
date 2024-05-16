@@ -23,6 +23,7 @@ RUN apt update && apt -y upgrade \
     && python setup.py sdist bdist_wheel \
     && pip install ${ESALERT_HOME}/dist/*.tar.gz \
     && pip install sigma-cli \
+    && sigma plugin install elasticsearch \
     && sigma plugin install sysmon \
     && sigma plugin install windows \
     && apt -y remove gcc libffi-dev \
@@ -35,7 +36,7 @@ COPY scripts/* ${ESALERT_HOME}/
 COPY config.yaml ${ESALERT_HOME}/
 COPY pull-sigma-config.yaml ${ESALERT_HOME}/
 COPY rules/* ${ESALERT_HOME}/rules/
-COPY sigmac/sigmac-config.yml ${ESALERT_SIGMA_HOME}/sigmac-config.yml
+COPY sigmac/* ${ESALERT_SIGMA_HOME}/
 
 RUN chmod +x ${ESALERT_HOME}/pull-sigma.sh \
 # ********* Adding Elastalert User *************
