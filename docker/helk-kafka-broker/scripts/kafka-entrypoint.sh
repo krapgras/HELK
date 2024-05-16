@@ -57,7 +57,8 @@ sed -i "s/^node\.id\=.*$/node.id=${KAFKA_NODE_ID}/g" ${KAFKA_HOME}/config/server
 sed -i "s/^log.retention.hours\=.*$/log.retention.hours\=$LOG_RETENTION_HOURS/g" ${KAFKA_HOME}/config/server.properties
 sed -i "s/^process\.roles\=.*$/process.roles=${KAFKA_ROLE}/g" ${KAFKA_HOME}/config/server.properties
 
-if [[$KAFKA_ROLE == "controller"]]
+if [["$KAFKA_ROLE" == "controller"]]
+then
   sed -i "s/^advertised\.listeners\=PLAINTEXT:\/\/.*$//g"
   sed -i "s/^listeners\=PLAINTEXT:\/\/.*$/listeners\=CONTROLLER:\/\/:9093/g" ${KAFKA_HOME}/config/server.properties
   sed -i "s/^listeners\=PLAINTEXT:\/\/.*$/listeners=CONTROLLER:\/\/:9093/g" ${KAFKA_HOME}/config/server.properties
@@ -66,6 +67,10 @@ else
   sed -i "s/^listeners\=PLAINTEXT:\/\/.*$/listeners=PLAINTEXT:\/\/${KAFKA_BROKER_NAME}\:${KAFKA_BROKER_PORT}/g" ${KAFKA_HOME}/config/server.properties
   sed -i "s/^advertised\.listeners\=PLAINTEXT:\/\/.*$/advertised\.listeners\=PLAINTEXT\:\/\/${ADVERTISED_LISTENER}\:${KAFKA_BROKER_PORT}/d" ${KAFKA_HOME}/config/server.properties
 fi
+
+echo "[HELK-DOCKER-INSTALLATION-INFO] Create Kafka metadata properties file.."
+
+${KAFKA_HOME}/bin/kafka-storage.sh format -t "${KAFKA_CLUSTER_ID}" -c "${KAFKA_HOME}/config/server.properties"
 
 if [[ -z "$KAFKA_CREATE_TOPICS" ]]; then
   KAFKA_CREATE_TOPICS=winlogbeat

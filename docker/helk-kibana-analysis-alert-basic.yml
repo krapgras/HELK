@@ -135,6 +135,7 @@ services:
       - helk-logstash
       - helk-kafka-base
     environment:
+      KAFKA_CLUSTER_ID: q1Sh-9_ISia_zwGINzRvyQ
       KAFKA_ROLE: controller
       KAFKA_NODE_ID: 1
       KAFKA_BROKER_PORT: 9092
@@ -160,6 +161,7 @@ services:
     depends_on:
       - helk-kraft-controller
     environment:
+      KAFKA_CLUSTER_ID: q1Sh-9_ISia_zwGINzRvyQ
       KAFKA_BROKER_NAME: helk-kafka-broker
       KAFKA_ROLE: broker
       KAFKA_NODE_ID: 2
@@ -170,8 +172,8 @@ services:
       KAFKA_CREATE_TOPICS: winlogbeat, winevent, SYSMON_JOIN, filebeat, zeek
       KAFKA_HEAP_OPTS: -Xmx1G -Xms256M
       LOG_RETENTION_HOURS: 4
-    ports:
-      - "9092:9092"
+    #ports:
+    #  - "9092:9092"
     networks:
       helk:
   helk-ksql-server:
