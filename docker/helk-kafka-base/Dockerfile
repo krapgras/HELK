@@ -15,8 +15,8 @@ ENV SCALA_VERSION=2.13
 ENV KAFKA_LOGS_PATH=/var/log/kafka
 ENV KAFKA_CONSOLE_LOG=/var/log/kafka/helk-kafka.log
 ENV KAFKA_HOME=/opt/helk/kafka
-ENV KAFKA_GID=1000
-ENV KAFKA_UID=1000
+ENV KAFKA_GID=910
+ENV KAFKA_UID=910
 ENV KAFKA_USER=kafkauser
 
 # *********** Installing Prerequisites ***************
