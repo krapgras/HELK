@@ -21,6 +21,7 @@ RUN chmod +x ${KAFKA_HOME}/scripts/kafka-entrypoint.sh \
 
 USER ${KAFKA_USER}
 
+EXPOSE 9092 9093
 WORKDIR /opt/helk/kafka/scripts/
 ENTRYPOINT ["./kafka-entrypoint.sh"]
 CMD ["/bin/bash","-c","$KAFKA_SCRIPT $KAFKA_CONFIG"]
