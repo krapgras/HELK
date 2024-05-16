@@ -16,8 +16,7 @@ ENV KAFKA_CONFIG=$KAFKA_HOME/config/server.properties
 RUN mv $KAFKA_CONFIG ${KAFKA_HOME}/config/backup_server.properties
 COPY server.properties ${KAFKA_HOME}/config/
 COPY scripts ${KAFKA_HOME}/scripts
-RUN chmod +x ${KAFKA_HOME}/scripts/kafka-entrypoint.sh \
-    && chmod +x ${KAFKA_HOME}/scripts/kafka-create-topics.sh
+RUN chmod +x ${KAFKA_HOME}/scripts/kafka-entrypoint.sh
 
 USER ${KAFKA_USER}
 
