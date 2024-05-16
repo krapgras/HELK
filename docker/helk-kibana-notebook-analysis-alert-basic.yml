@@ -122,9 +122,9 @@ services:
     container_name: helk-kafka-base
     depends_on:
       - helk-base
-  helk-zookeeper:
-    build: helk-zookeeper/
-    container_name: helk-zookeeper
+  helk-kraft-controller:
+    build: helk-kraft-controller/
+    container_name: helk-kraft-controller
     logging:
       driver: "json-file"
       options:
@@ -134,6 +134,18 @@ services:
     depends_on:
       - helk-logstash
       - helk-kafka-base
+    environment:
+      KAFKA_ROLE: controller
+      KAFKA_NODE_ID: 1
+      KAFKA_BROKER_PORT: 9092
+      REPLICATION_FACTOR: 1
+      ADVERTISED_LISTENER: ${ADVERTISED_LISTENER}
+      CONTROLLER_NAME: helk-kraft-controller
+      KAFKA_CREATE_TOPICS: winlogbeat, winevent, SYSMON_JOIN, filebeat, zeek
+      KAFKA_HEAP_OPTS: -Xmx1G -Xms256M
+      LOG_RETENTION_HOURS: 4
+    ports:
+      - "9092:9092"
     networks:
       helk:
   helk-kafka-broker:
@@ -146,14 +158,15 @@ services:
         max-size: "1m"
     restart: always
     depends_on:
-      - helk-zookeeper
+      - helk-kraft-controller
     environment:
       KAFKA_BROKER_NAME: helk-kafka-broker
-      KAFKA_BROKER_ID: 1
+      KAFKA_ROLE: broker
+      KAFKA_NODE_ID: 2
       KAFKA_BROKER_PORT: 9092
       REPLICATION_FACTOR: 1
       ADVERTISED_LISTENER: ${ADVERTISED_LISTENER}
-      ZOOKEEPER_NAME: helk-zookeeper
+      CONTROLLER_NAME: helk-kraft-controller
       KAFKA_CREATE_TOPICS: winlogbeat, winevent, SYSMON_JOIN, filebeat, zeek
       KAFKA_HEAP_OPTS: -Xmx1G -Xms256M
       LOG_RETENTION_HOURS: 4

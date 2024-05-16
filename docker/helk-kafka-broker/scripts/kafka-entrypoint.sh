@@ -24,10 +24,10 @@ if [[ -z "$KAFKA_BROKER_NAME" ]]; then
 fi
 echo "[HELK-DOCKER-INSTALLATION-INFO] Setting kafka broker name to $KAFKA_BROKER_NAME"
 
-if [[ -z "$KAFKA_BROKER_ID" ]]; then
-  KAFKA_BROKER_ID=1
+if [[ -z "$KAFKA_NODE_ID" ]]; then
+  KAFKA_NODE_ID=1
 fi
-echo "[HELK-DOCKER-INSTALLATION-INFO] Setting kafka broker id to $KAFKA_BROKER_ID"
+echo "[HELK-DOCKER-INSTALLATION-INFO] Setting kafka broker id to $KAFKA_NODE_ID"
 
 if [ -z "$LOG_RETENTION_HOURS" ]; then
   LOG_RETENTION_HOURS=4
@@ -39,10 +39,10 @@ if [[ -z "$REPLICATION_FACTOR" ]]; then
 fi
 echo "[HELK-DOCKER-INSTALLATION-INFO] Setting replication factor for topics to $REPLICATION_FACTOR"
 
-if [[ -z "$ZOOKEEPER_NAME" ]]; then
-  ZOOKEEPER_NAME=localhost
+if [[ -z "$CONTROLLER_NAME" ]]; then
+  CONTROLLER_NAME=localhost
 fi
-echo "[HELK-DOCKER-INSTALLATION-INFO] Setting Zookeeper name to $ZOOKEEPER_NAME"
+echo "[HELK-DOCKER-INSTALLATION-INFO] Setting Kraft Controller name to $CONTROLLER_NAME"
 
 if [[ -z "$ADVERTISED_LISTENER" ]]; then
   echo "[HELK-DOCKER-INSTALLATION-INFO] ADVERTISED_LISTENER MUST BE SET WHEN RUNNING CONTAINER.."
@@ -52,11 +52,20 @@ echo "[HELK-DOCKER-INSTALLATION-INFO] Setting Advertised listener value to $ADVE
 
 
 echo "[HELK-DOCKER-INSTALLATION-INFO] Updating Kafka server properties file.."
-sed -i "s/^advertised\.listeners\=PLAINTEXT:\/\/.*$/advertised\.listeners\=PLAINTEXT\:\/\/${ADVERTISED_LISTENER}\:${KAFKA_BROKER_PORT}/g" ${KAFKA_HOME}/config/server.properties
-sed -i "s/^listeners\=PLAINTEXT:\/\/.*$/listeners\=PLAINTEXT:\/\/${KAFKA_BROKER_NAME}\:${KAFKA_BROKER_PORT}/g" ${KAFKA_HOME}/config/server.properties
-sed -i "s/^listeners\=PLAINTEXT:\/\/.*$/listeners=PLAINTEXT:\/\/${KAFKA_BROKER_NAME}\:${KAFKA_BROKER_PORT}/g" ${KAFKA_HOME}/config/server.properties
-sed -i "s/^broker\.id\=.*$/broker.id=${KAFKA_BROKER_ID}/g" ${KAFKA_HOME}/config/server.properties
+
+sed -i "s/^node\.id\=.*$/node.id=${KAFKA_NODE_ID}/g" ${KAFKA_HOME}/config/server.properties
 sed -i "s/^log.retention.hours\=.*$/log.retention.hours\=$LOG_RETENTION_HOURS/g" ${KAFKA_HOME}/config/server.properties
+sed -i "s/^process\.roles\=.*$/process.roles=${KAFKA_ROLE}/g" ${KAFKA_HOME}/config/server.properties
+
+if [[$KAFKA_ROLE == "controller"]]
+  sed -i "s/^advertised\.listeners\=PLAINTEXT:\/\/.*$//g"
+  sed -i "s/^listeners\=PLAINTEXT:\/\/.*$/listeners\=CONTROLLER:\/\/:9093/g" ${KAFKA_HOME}/config/server.properties
+  sed -i "s/^listeners\=PLAINTEXT:\/\/.*$/listeners=CONTROLLER:\/\/:9093/g" ${KAFKA_HOME}/config/server.properties
+else
+  sed -i "s/^listeners\=PLAINTEXT:\/\/.*$/listeners\=PLAINTEXT:\/\/${KAFKA_BROKER_NAME}\:${KAFKA_BROKER_PORT}/g" ${KAFKA_HOME}/config/server.properties
+  sed -i "s/^listeners\=PLAINTEXT:\/\/.*$/listeners=PLAINTEXT:\/\/${KAFKA_BROKER_NAME}\:${KAFKA_BROKER_PORT}/g" ${KAFKA_HOME}/config/server.properties
+  sed -i "s/^advertised\.listeners\=PLAINTEXT:\/\/.*$/advertised\.listeners\=PLAINTEXT\:\/\/${ADVERTISED_LISTENER}\:${KAFKA_BROKER_PORT}/d" ${KAFKA_HOME}/config/server.properties
+fi
 
 if [[ -z "$KAFKA_CREATE_TOPICS" ]]; then
   KAFKA_CREATE_TOPICS=winlogbeat

@@ -555,7 +555,7 @@ show_final_information() {
     echo "HELK KIBANA USER: helk"
     echo "HELK KIBANA PASSWORD: ${KIBANA_UI_PASSWORD_INPUT}"
   fi
-  echo "HELK ZOOKEEPER: ${HOST_IP}:2181"
+  echo "HELK KRAFT CONTROLLER: ${HOST_IP}:9092"
   echo "HELK KSQL SERVER: ${HOST_IP}:8088"
   echo " "
   echo "IT IS HUNTING SEASON!!!!!"
