@@ -22,6 +22,7 @@ HELK_ERROR_FILE="/tmp/helk_error"
 
 # Additional Settings
 helk_sigmac="${ESALERT_SIGMA_HOME}/sigmac-config.yml"
+helk_sigma_filter="${ESALERT_SIGMA_HOME}/elastalert_any_v2.yml"
 
 getYamlKey() {
     python3 -c "import yaml;print(yaml.safe_load(open('$1'))$2)" 2>${HELK_ERROR_FILE}
@@ -136,10 +137,10 @@ for  rule_category in rules/windows/* ; do
                     continue
                 else
                     echo "[+++] Processing Windows process creation rule: $rule .."
-                    sigma convert -t elastalert -c tools/config/generic/sysmon.yml -c "${helk_sigmac}" --backend-option timestamp_field=etl_processed_time -o "${ESALERT_HOME}"/rules/sigma_sysmon_"$(basename "${rule}")" "$rule"
+                    sigma convert -t lucene -p sysmon -p "${helk_sigma_filter}" -c "${helk_sigmac}" --backend-option timestamp_field=etl_processed_time -o "${ESALERT_HOME}"/rules/sigma_sysmon_"$(basename "${rule}")" "$rule"
                     # Give unique rule name for sysmon
                     sed -i 's/^name: /name: Sysmon_/' "${ESALERT_HOME}"/rules/sigma_sysmon_"$(basename "${rule}")"
-                    sigma convert -t elastalert -c tools/config/generic/windows-audit.yml -c "${helk_sigmac}" --backend-option timestamp_field=etl_processed_time -o "${ESALERT_HOME}"/rules/sigma_"$(basename "${rule}")" "$rule"
+                    sigma convert -t lucene -p windows-audit -p "${helk_sigma_filter}" -c "${helk_sigmac}" --backend-option timestamp_field=etl_processed_time -o "${ESALERT_HOME}"/rules/sigma_"$(basename "${rule}")" "$rule"
                     rule_counter=$[$rule_counter +1]
                 fi
             fi
@@ -150,7 +151,7 @@ for  rule_category in rules/windows/* ; do
                 continue
             else
                 echo "[+++] Processing additional Windows rule: $rule .."
-                sigma convert -t elastalert -c "${helk_sigmac}" --backend-option timestamp_field=etl_processed_time -o "${ESALERT_HOME}"/rules/sigma_"$(basename "${rule}")" "$rule"
+                sigma convert -t lucene -p "${helk_sigma_filter}" -c "${helk_sigmac}" --backend-option timestamp_field=etl_processed_time -o "${ESALERT_HOME}"/rules/sigma_"$(basename "${rule}")" "$rule"
                 rule_counter=$[$rule_counter +1]
             fi
         done
@@ -166,10 +167,10 @@ for rule in rules/apt/* ; do
         continue
     else
         echo "[+++] Processing apt rule: $rule .."
-        sigma convert -t elastalert -c tools/config/generic/sysmon.yml -c "${helk_sigmac}" --backend-option timestamp_field=etl_processed_time -o "${ESALERT_HOME}"/rules/sigma_sysmon_apt_"$(basename "${rule}")" "$rule"
+        sigma convert -t lucene -p sysmon -p "${helk_sigma_filter}" -c "${helk_sigmac}" --backend-option timestamp_field=etl_processed_time -o "${ESALERT_HOME}"/rules/sigma_sysmon_apt_"$(basename "${rule}")" "$rule"
         # Give unique rule name for sysmon
         sed -i 's/^name: /name: Sysmon_/' "${ESALERT_HOME}"/rules/sigma_sysmon_apt_"$(basename "${rule}")"
-        sigma convert -t elastalert -c tools/config/generic/windows-audit.yml -c "${helk_sigmac}" --backend-option timestamp_field=etl_processed_time -o "${ESALERT_HOME}"/rules/sigma_apt_"$(basename "${rule}")" "$rule"
+        sigma convert -t lucene -p windows-audit -c "${helk_sigmac}" --backend-option timestamp_field=etl_processed_time -o "${ESALERT_HOME}"/rules/sigma_apt_"$(basename "${rule}")" "$rule"
         rule_counter=$[$rule_counter +1]
     fi
 done

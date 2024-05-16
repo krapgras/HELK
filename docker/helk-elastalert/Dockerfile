@@ -23,6 +23,8 @@ RUN apt update && apt -y upgrade \
     && python setup.py sdist bdist_wheel \
     && pip install ${ESALERT_HOME}/dist/*.tar.gz \
     && pip install sigma-cli \
+    && sigma plugin install sysmon \
+    && sigma plugin install windows \
     && apt -y remove gcc libffi-dev \
     && apt -y autoremove \
     # ********* Download SIGMA *******************
