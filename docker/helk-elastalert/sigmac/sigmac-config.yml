@@ -1,4 +1,4 @@
-name: transformation_demo
+name: helk_transformation
 priority: 100
 transformations:
   - id: Object_AccessList_4656_mapping
