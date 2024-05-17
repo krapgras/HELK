@@ -359,6 +359,7 @@ build_helk() {
   export ADVERTISED_LISTENER=$HOST_IP
 
   echo "$HELK_INFO_TAG Building & running HELK from $COMPOSE_CONFIG file.."
+  docker-compose -f helk-base-images.yml build >>$LOGFILE 2>&1
   docker-compose -f $COMPOSE_CONFIG up --build -d >>$LOGFILE 2>&1
   ERROR=$?
   if [ $ERROR -ne 0 ]; then

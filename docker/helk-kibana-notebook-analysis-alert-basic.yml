@@ -1,9 +1,9 @@
 version: '3.5'
 
 services:
-  helk-base:
-    build: helk-base/
-    container_name: helk-base
+  # helk-base:
+  #   build: helk-base/
+  #   container_name: helk-base
   helk-elasticsearch:
     build: helk-elasticsearch/
     container_name: helk-elasticsearch
@@ -117,11 +117,11 @@ services:
       - helk-kibana
     networks:
       helk:
-  helk-kafka-base:
-    build: helk-kafka-base/
-    container_name: helk-kafka-base
-    depends_on:
-      - helk-base
+  # helk-kafka-base:
+  #   build: helk-kafka-base/
+  #   container_name: helk-kafka-base
+  #   depends_on:
+  #     - helk-base
   helk-kraft-controller:
     build: helk-kraft-controller/
     container_name: helk-kraft-controller
@@ -218,37 +218,37 @@ services:
     tty: true
     networks:
       helk:
-  helk-jupyter-base:
-    build: helk-jupyter-base/
-    container_name: helk-jupyter-base
-        environment:
-      JUPYTER_TYPE: lab
-      JUPYTER_BASE_URL: /jupyter
-    restart: always
-    networks:
-      helk:
-  helk-jupyter-pyspark:
-    build: helk-jupyter-pyspark/
-    container_name: helk-jupyter-pyspark
-    environment:
-      JUPYTER_TYPE: notebook
-      JUPYTER_BASE_URL: /jupyter
-    restart: always
-    networks:
-      helk:
-  helk-jupyter-hunt:
-    build: helk-jupyter-hunt/
-    container_name: helk-jupyter-hunt
-    volumes:
-      - notebooks:/opt/jupyter/notebooks
-    environment:
-      JUPYTER_TYPE: lab
-      JUPYTER_BASE_URL: /jupyter
-    ports:
-      - "8888:8888"
-    restart: always
-    networks:
-      helk:
+  # helk-jupyter-base:
+  #   build: helk-jupyter-base/
+  #   container_name: helk-jupyter-base
+  #       environment:
+  #     JUPYTER_TYPE: lab
+  #     JUPYTER_BASE_URL: /jupyter
+  #   restart: always
+  #   networks:
+  #     helk:
+  # helk-jupyter-pyspark:
+  #   build: helk-jupyter-pyspark/
+  #   container_name: helk-jupyter-pyspark
+  #   environment:
+  #     JUPYTER_TYPE: notebook
+  #     JUPYTER_BASE_URL: /jupyter
+  #   restart: always
+  #   networks:
+  #     helk:
+  # helk-jupyter-hunt:
+  #   build: helk-jupyter-hunt/
+  #   container_name: helk-jupyter-hunt
+  #   volumes:
+  #     - notebooks:/opt/jupyter/notebooks
+  #   environment:
+  #     JUPYTER_TYPE: lab
+  #     JUPYTER_BASE_URL: /jupyter
+  #   ports:
+  #     - "8888:8888"
+  #   restart: always
+  #   networks:
+  #     helk:
   helk-jupyter:
     build: helk-jupyter/
     container_name: helk-jupyter
@@ -267,11 +267,11 @@ services:
       - helk-logstash
     networks:
       helk:
-  helk-spark-base:
-    build: helk-spark-base/
-    container_name: helk-spark-base
-    depends_on:
-      - helk-base
+  # helk-spark-base:
+  #   build: helk-spark-base/
+  #   container_name: helk-spark-base
+  #   depends_on:
+  #     - helk-base
   helk-spark-master:
     build: helk-spark-master/
     container_name: helk-spark-master
