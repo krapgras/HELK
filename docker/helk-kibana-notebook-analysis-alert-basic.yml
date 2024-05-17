@@ -218,6 +218,37 @@ services:
     tty: true
     networks:
       helk:
+  helk-jupyter-base:
+    build: helk-jupyter-base/
+    container_name: helk-jupyter-base
+        environment:
+      JUPYTER_TYPE: lab
+      JUPYTER_BASE_URL: /jupyter
+    restart: always
+    networks:
+      helk:
+  helk-jupyter-pyspark:
+    build: helk-jupyter-pyspark/
+    container_name: helk-jupyter-pyspark
+    environment:
+      JUPYTER_TYPE: notebook
+      JUPYTER_BASE_URL: /jupyter
+    restart: always
+    networks:
+      helk:
+  helk-jupyter-hunt:
+    build: helk-jupyter-hunt/
+    container_name: helk-jupyter-hunt
+    volumes:
+      - notebooks:/opt/jupyter/notebooks
+    environment:
+      JUPYTER_TYPE: lab
+      JUPYTER_BASE_URL: /jupyter
+    ports:
+      - "8888:8888"
+    restart: always
+    networks:
+      helk:
   helk-jupyter:
     build: helk-jupyter/
     container_name: helk-jupyter
