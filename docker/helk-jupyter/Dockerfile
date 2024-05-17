@@ -3,7 +3,7 @@
 # Author: Roberto Rodriguez (@Cyb3rWard0g)
 # License: GPL-3.0
 
-FROM docker-helk-jupyter-hunter
+FROM docker-helk-jupyter-hunt
 LABEL maintainer="Roberto Rodriguez @Cyb3rWard0g"
 LABEL description="Dockerfile Notebooks-Forge Jupyter-Hunt Project."
 
@@ -32,7 +32,9 @@ COPY spark/* ${SPARK_HOME}/conf/
 COPY scripts/* ${JUPYTER_DIR}/scripts/
 
 RUN chown -R ${USER} ${JUPYTER_DIR} ${HOME} ${SPARK_HOME} \
-    && chown ${USER} /run/postgresql
+    && chown ${USER} /run/postgresql \
+    && chown ${USER} /opt/jupyter/scripts/jupyter-cmd.sh \
+    && chmod +x /opt/jupyter/scripts/jupyter-cmd.sh
 
 WORKDIR ${HOME}
 ENTRYPOINT ["/opt/jupyter/scripts/jupyter-entrypoint.sh"]

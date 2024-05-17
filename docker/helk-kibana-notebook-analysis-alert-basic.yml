@@ -1,9 +1,4 @@
-version: '3.5'
-
 services:
-  # helk-base:
-  #   build: helk-base/
-  #   container_name: helk-base
   helk-elasticsearch:
     build: helk-elasticsearch/
     container_name: helk-elasticsearch
@@ -117,11 +112,6 @@ services:
       - helk-kibana
     networks:
       helk:
-  # helk-kafka-base:
-  #   build: helk-kafka-base/
-  #   container_name: helk-kafka-base
-  #   depends_on:
-  #     - helk-base
   helk-kraft-controller:
     build: helk-kraft-controller/
     container_name: helk-kraft-controller
@@ -133,7 +123,6 @@ services:
     restart: always
     depends_on:
       - helk-logstash
-      - helk-kafka-base
     environment:
       KAFKA_CLUSTER_ID: q1Sh-9_ISia_zwGINzRvyQ
       KAFKA_ROLE: controller
@@ -218,37 +207,6 @@ services:
     tty: true
     networks:
       helk:
-  # helk-jupyter-base:
-  #   build: helk-jupyter-base/
-  #   container_name: helk-jupyter-base
-  #       environment:
-  #     JUPYTER_TYPE: lab
-  #     JUPYTER_BASE_URL: /jupyter
-  #   restart: always
-  #   networks:
-  #     helk:
-  # helk-jupyter-pyspark:
-  #   build: helk-jupyter-pyspark/
-  #   container_name: helk-jupyter-pyspark
-  #   environment:
-  #     JUPYTER_TYPE: notebook
-  #     JUPYTER_BASE_URL: /jupyter
-  #   restart: always
-  #   networks:
-  #     helk:
-  # helk-jupyter-hunt:
-  #   build: helk-jupyter-hunt/
-  #   container_name: helk-jupyter-hunt
-  #   volumes:
-  #     - notebooks:/opt/jupyter/notebooks
-  #   environment:
-  #     JUPYTER_TYPE: lab
-  #     JUPYTER_BASE_URL: /jupyter
-  #   ports:
-  #     - "8888:8888"
-  #   restart: always
-  #   networks:
-  #     helk:
   helk-jupyter:
     build: helk-jupyter/
     container_name: helk-jupyter
@@ -267,11 +225,6 @@ services:
       - helk-logstash
     networks:
       helk:
-  # helk-spark-base:
-  #   build: helk-spark-base/
-  #   container_name: helk-spark-base
-  #   depends_on:
-  #     - helk-base
   helk-spark-master:
     build: helk-spark-master/
     container_name: helk-spark-master
@@ -288,7 +241,6 @@ services:
     restart: always
     depends_on:
       - helk-logstash
-      - helk-spark-base
     networks:
       helk:
   helk-spark-worker:
@@ -320,7 +272,6 @@ services:
     restart: always
     depends_on:
       - helk-logstash
-      - helk-base
     environment:
       ES_HOST: helk-elasticsearch
       ES_PORT: 9200

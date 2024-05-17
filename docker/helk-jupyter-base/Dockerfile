@@ -66,7 +66,7 @@ RUN mkdir /home/${USER}/.conda \
   && conda config --system --prepend channels conda-forge \
   && conda install --quiet --yes conda-build \
   && conda install --quiet --yes \
-    'python=3.12.2' \
+    'python=3.11.9' \
     'nbconvert=7.16.4' \
     'notebook=7.2.0' \
     'jupyterhub=4.1.5' \
@@ -74,7 +74,6 @@ RUN mkdir /home/${USER}/.conda \
     'pandas=2.2.2' \
   && conda update --all --quiet --yes \
   # *********** Installing Jupyter Extensions *****************
-  && jupyter labextension install @jupyterlab/celltags \
   && rm -rf $CONDA_DIR/share/jupyter/lab/staging \
   # *********** Clean *****************
   && npm cache clean --force \
@@ -89,4 +88,4 @@ EXPOSE 8888
 
 # *********** RUN HELK ***************
 WORKDIR ${HOME}
-CMD ["/opt/jupyter/scripts/jupyter-cmd.sh"]
+#CMD ["/opt/jupyter/scripts/jupyter-cmd.sh"]

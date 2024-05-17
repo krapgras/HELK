@@ -32,7 +32,7 @@ RUN mkdir -v ${ESHADOOP_DIR} \
     'altair=5.3.0' \
     's3fs=2024.5.0' \
     'elasticsearch-dsl=8.13.1' \
-    'matplotlib=3.9.0' \
+    'matplotlib=3.8.4' \
     'networkx=3.3' \
     'nxviz=0.7.4' \
   && conda update --all --quiet --yes \

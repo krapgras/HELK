@@ -1,9 +1,4 @@
-version: '3.5'
-
 services:
-  helk-base:
-    build: helk-base/
-    container_name: helk-base
   helk-elasticsearch:
     build: helk-elasticsearch/
     container_name: helk-elasticsearch
@@ -117,11 +112,6 @@ services:
       - helk-kibana
     networks:
       helk:
-  helk-kafka-base:
-    build: helk-kafka-base/
-    container_name: helk-kafka-base
-    depends_on:
-      - helk-base
   helk-kraft-controller:
     build: helk-kraft-controller/
     container_name: helk-kraft-controller
@@ -133,7 +123,6 @@ services:
     restart: always
     depends_on:
       - helk-logstash
-      - helk-kafka-base
     environment:
       KAFKA_CLUSTER_ID: q1Sh-9_ISia_zwGINzRvyQ
       KAFKA_ROLE: controller
