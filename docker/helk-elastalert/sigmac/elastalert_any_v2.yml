@@ -22,7 +22,7 @@ postprocessing:
       {% set index = 'logs-endpoint-winevent-system-*' -%}  
       {% elif rule.logsource.category == 'wmi_event' or rule.logsource.service == 'wmi' -%}
       {% set index = 'logs-endpoint-winevent-wmiactivity-*' -%}
-      {% elif rule.logsource.category in ['ps_classic_start,'ps_module','ps_script'] or rule.logsource.service in ['powershell','powershell-classic'] -%}
+      {% elif rule.logsource.category in ['ps_classic_start','ps_module','ps_script'] or rule.logsource.service in ['powershell','powershell-classic'] -%}
       {% set index = 'logs-endpoint-winevent-powershell-*' -%}
       {% endif -%}
       {% set index = 'logs-endpoint-winevent-*' -%}
