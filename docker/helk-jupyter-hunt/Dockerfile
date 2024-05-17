@@ -59,9 +59,12 @@ RUN mkdir -v ${ESHADOOP_DIR} \
 
 # *********** Adding HELK scripts and files to Container ***************
 COPY spark/* ${SPARK_HOME}/conf/
+COPY scripts/spark-worker-entrypoint.sh ${SPARK_HOME}/sbin
 
 USER root
 
 RUN chown -R ${USER} ${JUPYTER_DIR} ${HOME} ${SPARK_HOME}
 
 USER ${USER}
+WORKDIR $SPARK_HOME/sbin
+ENTRYPOINT ["./spark-worker-entrypoint.sh"]
