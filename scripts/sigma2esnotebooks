@@ -64,7 +64,7 @@ if args.es_user:
     ESUSER = args.es_user
 if args.es_password:
     ESPASSWORD = args.es_password
-SIGMACTARGET = "es-qs"
+SIGMACTARGET = "lucene"
 
 # Reading field Mappings
 print("[+] Reading index and field mappings from {}..".format(FIELDMAPPINGSCONFIG))

@@ -1,453 +1,2329 @@
-title: HELK index patterns and OSSEM field mappings
-order: 20
-backends:
-  - es-qs
-  - es-dsl
-  - es-rule
-  - kibana
-  - xpack-watcher
-  - elastalert
-  - elastalert-dsl
-  - elasticsearch-rule
-  - ee-outliers
-logsources:
-  windows:
-    product: windows
-    index: logs-endpoint-winevent-*
-  windows-application:
-    product: windows
-    service: application
-    index: logs-endpoint-winevent-application-*
-  windows-security:
-    product: windows
-    service: security
-    index: logs-endpoint-winevent-security-*
-  windows-sysmon:
-    product: windows
-    service: sysmon
-    index: logs-endpoint-winevent-sysmon-*
-  windows-system:
-    product: windows
-    service: system
-    index: logs-endpoint-winevent-system-*
-  windows-wmi:
-    product: windows
-    service: wmi
-    index: logs-endpoint-winevent-wmiactivity-*
-  windows-powershell:
-    product: windows
-    service: powershell
-    index: logs-endpoint-winevent-powershell-*
-  windows-powershell-classic:
-    product: windows
-    service: powershell-classic
-    index: logs-endpoint-winevent-powershell-*
-defaultindex: logs-*
-fieldmappings:
-  AccessList:
-    EventID=4656: object_access_list
-    EventID=4659: object_access_list
-    EventID=4660: object_access_list
-    EventID=4661: object_access_list
-    EventID=4662: object_access_list
-    EventID=4663: object_access_list
-    EventID=5140: user_access_list
-    EventID=5142: user_access_list
-    EventID=5143: user_access_list
-    EventID=5144: user_access_list
-    EventID=5145: user_access_list
-    default: AccessList
-  AccessMask:
-    EventID=4656: object_access_mask
-    EventID=4659: object_access_mask
-    EventID=4660: object_access_mask
-    EventID=4661: object_access_mask
-    EventID=4662: object_access_mask
-    EventID=4663: object_access_mask
-    EventID=4674: object_access_mask
-    EventID=5140: share_access_mask
-    EventID=5142: share_access_mask
-    EventID=5143: share_access_mask
-    EventID=5144: share_access_mask
-    EventID=5145: share_access_mask
-    default: AccessMask
-  AccountName: user_name
-  AllowedToDelegateTo: target_user_allowed_to_delegate
-  AppCorrelationID: dsoperation_app_correlation_id
-  AttributeLDAPDisplayName: dsobject_attribute_name
-  AttributeSyntaxOID: dsobject_attribute_type
-  AttributeValue: dsobject_attribute_value
-  AuditPolicyChanges: policy_changes
-  AuthenticationPackageName: logon_authentication_package
-  CallingProcessName: process_path
-  CallTrace: process_call_trace
-  ClientAddress: src_ip_addr
-  ClientIPAddress: src_ip_addr
-  ClientIP: src_original_value
-  CommandLine: process_command_line
-  Company: file_company
-  ComputerName: host_name
-  Configuration:
-    EventID=16: sysmon_configuration
-    default: Configuration
-  ConnectedViaIPAddress: dst_nat_ip_addr
-  CurrentDirectory: process_current_directory
-  Description: file_description
-  DestAddress: dst_ip_addr
-  Destination:
-    EventID=20: wmi_consumer_destination
-    default: Destination
-  DestinationHostname: dst_host_name
-  DestinationIp: dst_ip_addr
-  DestinationPort: dst_port
-  DestinationPortName: dst_port_name
-  DestinationIsIpv6: dst_is_ipv6
-  Details:
-    EventID=13: registry_key_value
-    default: Details
-  Device: device_name
-  DisabledPrivilegeList:
-    EventID=4703: target_user_disabled_privilege_list
-    default: DisabledPrivilegeList
-  DSName: host_domain
-  DSType: dsobject_domain_type
-  EnabledPrivilegeList:
-    EventID=4703: target_user_enabled_privilege_list
-  EngineVersion: powershell.engine.version
-  EventID: event_id
-  EventType: event_category_type
-  EventNamespace:
-    EventID=19: wmi_namespace
-    default: EventNamespace
-  Filter:
-    EventID=21: wmi_filter_path
-  FailureCode: ticket_failure_code
-  FileName: file_name
-  FileVersion: file_version
-  GrantedAccess: process_granted_access
-  GroupName: group_name
-  GroupSid: group_sid
-  HiveName: hive_name
-  HostVersion: powershell.host.version
-  Image: process_path
-  ImageLoaded:
-    EventID=6: driver_loaded
-    EventID=7: module_loaded
-    default: ImageLoaded
-  Imphash: hash_imphash
-  Initiated:
-    EventID=3: network_initiated
-    default: Initiated
-  IntegrityLevel:
-    EventID=1: process_integrity_level
-    default: IntegrityLevel
-  ipAddress: dst_ip_addr
-  IpAddress: src_original_value
-  IpAddresses:
-    EventID=5168: ip_addresses
-    default: IpAddresses
-  IPString: src_ip_addr
-  LaunchedViaIPAddress: dst_ip_addr
-  LogonProcessName: logon_process_name
-  LogonType: logon_type
-  MachineIpAddress: dst_ip_addr
-  MachineName: host_name
-  Name:
-    EventID=19: wmi_filter_name
-    EventID=20: wmi_consumer_name
-    default: Name
-  NewObjectDN: dsobject_new_dn
-  NewProcessName: process_path
-  NewName:
-    EventID=14: registry_key_new_name
-    default: NewName
-  ObjectClass: dsobject_class
-  ObjectDN: dsobject_dn
-  ObjectGUID: dsobject_guid
-  ObjectName: object_name
-  ObjectServer: object_server
-  ObjectType: object_type
-  ObjectValueName: object_value_name
-  OldObjectDN: dsobject_old_dn
-  OpCorrelationID: dsoperation_correlation_id
-  Operation:
-    EventID=19: wmi_operation
-    EventID=20: wmi_operation
-    EventID=21: wmi_operation
-    EventID=5058: key_operation
-    EventID=5059: key_operation
-    EventID=5061: key_operation
-    default: Operation
-  OperationType:
-    EventID=4657: object_operation_type
-    EventID=4660: object_operation_type
-    EventID=4661: object_operation_type
-    EventID=4662: object_operation_type
-    EventID=4663: object_operation_type
-    EventID=5136: dsoperation_type
-    EventID=5137: dsoperation_type
-    EventID=5138: dsoperation_type
-    EventID=5139: dsoperation_type
-    EventID=5141: dsoperation_type
-    EventID=5169: dsoperation_type
-    EventID=5170: dsoperation_type
-    default: OperationType
-  OriginalFileName: file_name_original
-  ParentImage: process_parent_path
-  ParentProcessName: process_parent_path
-  PasswordLastSet: user_attribute_password_lastset
-  Path: process_path
-  ParentCommandLine: process_parent_command_line
-  PipeName: pipe_name
-  ProcessCommandLine: process_command_line
-  ProcessName: process_path
-  processPath: process_path
-  ProcessPath: process_path
-  Product: file_product
-  Properties: object_properties
-  Protocol:
-    EventID=3: network_protocol
-    EventID=5152: network_protocol
-    EventID=5154: network_protocol
-    EventID=5156: network_protocol
-    EventID=5157: network_protocol
-    EventID=5158: network_protocol
-    default: Protocol
-  Query:
-    EventID=19: wmi_query
-    default: Query
-  RelativeTargetName: share_relative_target_name
-  SamAccountName: user_attribute_samaccount_name
-  SchemaVersion:
-    EventID=4: sysmon_schema_version
-    default: SchemaVersion
-  ServiceFileName: service_image_path
-  ServiceName: service_name
-  ShareName: share_name
-  Signature: signature
-  SignatureStatus: signature_status
-  Signed: signed
-  Source: source_name
-  SourceAddress: src_ip_addr
-  SourceHostname: src_host_name
-  SourceIsIpv6: src_is_ipv6
-  SourceImage: process_path
-  SourceIp: src_ip_addr
-  SourcePort: src_port
-  SourcePortName: src_port_name
-  StartAddress: thread_start_address
-  StartFunction: thread_start_function
-  StartModule: thread_start_module
-  Status: event_status
-  State:
-    EventID=4: service_state
-    EventID=16: sysmon_configuration_state
-    default: State
-  SubjectDomainName: user_domain
-  SubjectUserName:
-    EventID=4611: user_name
-    EventID=4616: user_name
-    EventID=4624: user_reporter_name
-    EventID=4625: user_reporter_name
-    EventID=4626: user_reporter_name
-    EventID=4627: user_reporter_name
-    EventID=4648: user_name
-    EventID=4649: user_reporter_name
-    EventID=4656: user_name
-    EventID=4657: user_name
-    EventID=4658: user_name
-    EventID=4659: user_name
-    EventID=4660: user_name
-    EventID=4661: user_name
-    EventID=4662: user_name
-    EventID=4663: user_name
-    EventID=4664: user_name
-    EventID=4670: user_name
-    EventID=4672: user_name
-    EventID=4673: user_name
-    EventID=4674: user_name
-    EventID=4688: user_name
-    EventID=4689: user_name
-    EventID=4690: user_name
-    EventID=4692: user_name
-    EventID=4693: user_name
-    EventID=4694: user_name
-    EventID=4695: user_name
-    EventID=4696: user_name
-    EventID=4697: user_name
-    EventID=4698: user_name
-    EventID=4699: user_name
-    EventID=4700: user_name
-    EventID=4701: user_name
-    EventID=4702: user_name
-    EventID=4703: user_name
-    EventID=4704: user_name
-    EventID=4715: user_name
-    EventID=4719: user_name
-    EventID=4720: user_name
-    EventID=4722: user_name
-    EventID=4723: user_name
-    EventID=4724: user_name
-    EventID=4725: user_name
-    EventID=4726: user_name
-    EventID=4727: user_name
-    EventID=4728: user_name
-    EventID=4729: user_name
-    EventID=4730: user_name
-    EventID=4731: user_name
-    EventID=4732: user_name
-    EventID=4733: user_name
-    EventID=4734: user_name
-    EventID=4735: user_name
-    EventID=4737: user_name
-    EventID=4738: user_name
-    EventID=4740: user_reporter_name
-    EventID=4741: user_name
-    EventID=4742: user_name
-    EventID=4743: user_name
-    EventID=4744: user_name
-    EventID=4745: user_name
-    EventID=4746: user_name
-    EventID=4747: user_name
-    EventID=4748: user_name
-    EventID=4749: user_name
-    EventID=4750: user_name
-    EventID=4751: user_name
-    EventID=4752: user_name
-    EventID=4753: user_name
-    EventID=4754: user_name
-    EventID=4755: user_name
-    EventID=4756: user_name
-    EventID=4757: user_name
-    EventID=4758: user_name
-    EventID=4759: user_name
-    EventID=4760: user_name
-    EventID=4761: user_name
-    EventID=4762: user_name
-    EventID=4763: user_name
-    EventID=4764: user_name
-    EventID=4767: user_reporter_name
-    EventID=4781: user_name
-    EventID=4782: user_name
-    EventID=4793: user_name
-    EventID=4794: user_name
-    EventID=4797: user_name
-    EventID=4798: user_name
-    EventID=4799: user_name
-    EventID=4817: user_name
-    EventID=4882: user_name
-    EventID=4883: user_name
-    EventID=4902: user_name
-    EventID=4904: user_name
-    EventID=4905: user_name
-    EventID=4906: user_name
-    EventID=4907: user_name
-    EventID=4908: user_name
-    EventID=4912: user_name
-    EventID=4964: user_name
-    EventID=4985: user_name
-    EventID=5051: user_name
-    EventID=5058: user_name
-    EventID=5059: user_name
-    EventID=5061: user_name
-    EventID=5136: user_name
-    EventID=5137: user_name
-    EventID=5138: user_name
-    EventID=5139: user_name
-    EventID=5140: user_name
-    EventID=5141: user_name
-    EventID=5142: user_name
-    EventID=5143: user_name
-    EventID=5144: user_name
-    EventID=5145: user_name
-    EventID=5168: user_name
-    EventID=5169: user_name
-    EventID=5170: user_name
-    EventID=5376: user_name
-    EventID=5377: user_name
-    EventID=5378: user_name
-    EventID=5379: user_name
-    EventID=5632: user_name
-    EventID=5633: user_name
-    EventID=6416: user_name
-    default: SubjectUserName
-  TargetServer:
-    EventID=5738: dst_original_value
-    default: target_server_name
-  TargetServerName: target_server_name
-  TaskName: task_name
-  TicketEncryptionType: ticket_encryption_type
-  TicketOptions: ticket_options
-  TargetFilename: file_name
-  TargetImage: target_process_path
-  TargetProcessAddress: thread_start_address
-  TargetObject: registry_key_path
-  TransactionId: object_transaction_guid
-  Type:
-    EventID=20: wmi_consumer_type
-    EventID=5379: credentials_read_type
-    default: Type
-  User: user_account
-  UserName: user_name
-  Value:
-    EventID=1102: dst_ip_addr
-    EventID=1104: dst_ip_addr
-    default: Value
-  Version:
-    EventID=4: sysmon_version
-    default: Version
-  Workstation: src_host_name
-  WorkstationName: src_host_name
-  PrivilegeList:
-    EventID=4656: object_privilege_list
-    EventID=4660: object_privilege_list
-    EventID=4661: object_privilege_list
-    EventID=4662: object_privilege_list
-    EventID=4663: object_privilege_list
-    EventID=4672: logon_privilege_list
-    EventID=4673: service_privilege_list
-    EventID=4674: object_privilege_list
-    EventID=4720: user_privilege_list
-    EventID=4722: user_privilege_list
-    EventID=4723: user_privilege_list
-    EventID=4724: user_privilege_list
-    EventID=4725: user_privilege_list
-    EventID=4726: user_privilege_list
-    EventID=4727: user_privilege_list
-    EventID=4728: user_privilege_list
-    EventID=4729: user_privilege_list
-    EventID=4730: user_privilege_list
-    EventID=4731: user_privilege_list
-    EventID=4732: user_privilege_list
-    EventID=4733: user_privilege_list
-    EventID=4734: user_privilege_list
-    EventID=4735: user_privilege_list
-    EventID=4737: user_privilege_list
-    EventID=4738: user_privilege_list
-    EventID=4741: user_privilege_list
-    EventID=4742: user_privilege_list
-    EventID=4743: user_privilege_list
-    EventID=4744: user_privilege_list
-    EventID=4745: user_privilege_list
-    EventID=4746: user_privilege_list
-    EventID=4747: user_privilege_list
-    EventID=4748: user_privilege_list
-    EventID=4749: user_privilege_list
-    EventID=4750: user_privilege_list
-    EventID=4751: user_privilege_list
-    EventID=4752: user_privilege_list
-    EventID=4753: user_privilege_list
-    EventID=4754: user_privilege_list
-    EventID=4755: user_privilege_list
-    EventID=4756: user_privilege_list
-    EventID=4757: user_privilege_list
-    EventID=4758: user_privilege_list
-    EventID=4759: user_privilege_list
-    EventID=4760: user_privilege_list
-    EventID=4761: user_privilege_list
-    EventID=4762: user_privilege_list
-    EventID=4763: user_privilege_list
-    EventID=4764: user_privilege_list
-    default: PrivilegeList
-  UtcTime: '@timestamp'
-  EventTime: '@timestamp'
+name: transformation_demo
+priority: 100
+transformations:
+  - id: Object_AccessList_4656_mapping
+    type: field_name_mapping
+    mapping:
+      AccessList: object_access_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4656
+
+  - id: Object_AccessList_4659_mapping
+    type: field_name_mapping
+    mapping:
+      AccessList: object_access_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4659
+
+  - id: Object_AccessList_4660_mapping
+    type: field_name_mapping
+    mapping:
+      AccessList: object_access_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4660
+
+  - id: Object_AccessList_4661_mapping
+    type: field_name_mapping
+    mapping:
+      AccessList: object_access_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4661
+
+  - id: Object_AccessList_4662_mapping
+    type: field_name_mapping
+    mapping:
+      AccessList: object_access_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4662
+
+  - id: Object_AccessList_4663_mapping
+    type: field_name_mapping
+    mapping:
+      AccessList: object_access_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4663
+
+  - id: User_AccessList_5140_mapping
+    type: field_name_mapping
+    mapping:
+      AccessList: user_access_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5140
+
+  - id: User_AccessList_5142_mapping
+    type: field_name_mapping
+    mapping:
+      AccessList: user_access_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5142
+
+  - id: User_AccessList_5143_mapping
+    type: field_name_mapping
+    mapping:
+      AccessList: user_access_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5143
+
+  - id: User_AccessList_5144_mapping
+    type: field_name_mapping
+    mapping:
+      AccessList: user_access_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5144
+
+  - id: User_AccessList_5145_mapping
+    type: field_name_mapping
+    mapping:
+      AccessList: user_access_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5145
+
+  - id: Object_Accessmask_4656_mapping
+    type: field_name_mapping
+    mapping:
+      AccessMask: object_access_mask
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4656
+
+  - id: Object_Accessmask_4659_mapping
+    type: field_name_mapping
+    mapping:
+      AccessMask: object_access_mask
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4659
+
+  - id: Object_Accessmask_4660_mapping
+    type: field_name_mapping
+    mapping:
+      AccessMask: object_access_mask
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4660
+
+  - id: Object_Accessmask_4661_mapping
+    type: field_name_mapping
+    mapping:
+      AccessMask: object_access_mask
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4661
+
+  - id: Object_Accessmask_4662_mapping
+    type: field_name_mapping
+    mapping:
+      AccessMask: object_access_mask
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4662
+
+  - id: Object_Accessmask_4663_mapping
+    type: field_name_mapping
+    mapping:
+      AccessMask: object_access_mask
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4663
+
+  - id: Object_Accessmask_4674_mapping
+    type: field_name_mapping
+    mapping:
+      AccessMask: object_access_mask
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4674
+
+  - id: Share_Accessmask_5140_mapping
+    type: field_name_mapping
+    mapping:
+      AccessMask: share_access_mask
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5140
+
+  - id: Share_Accessmask_5142_mapping
+    type: field_name_mapping
+    mapping:
+      AccessMask: share_access_mask
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5142
+
+  - id: Share_Accessmask_5143_mapping
+    type: field_name_mapping
+    mapping:
+      AccessMask: share_access_mask
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5143
+
+  - id: Share_Accessmask_5144_mapping
+    type: field_name_mapping
+    mapping:
+      AccessMask: share_access_mask
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5144
+
+  - id: Share_Accessmask_5145_mapping
+    type: field_name_mapping
+    mapping:
+      AccessMask: share_access_mask
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5145
+
+  - id: Configuration_mapping
+    type: field_name_mapping
+    mapping:
+      Configuration: sysmon_configuration
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 16
+    
+  - id: Destination_mapping
+    type: field_name_mapping
+    mapping:
+      Destination: wmi_consumer_destination
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 20
+    
+  - id: Details_mapping
+    type: field_name_mapping
+    mapping:
+      Details: registry_key_value
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 13
+    
+  - id: DisabledPrivilegeList_mapping
+    type: field_name_mapping
+    mapping:
+      DisabledPrivilegeList: target_user_disabled_privilege_list
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 4703
+    
+  - id: EnabledPrivilegeList_mapping
+    type: field_name_mapping
+    mapping:
+      EnabledPrivilegeList: target_user_enabled_privilege_list
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 4703
+  
+  - id: EventNamespace_mapping
+    type: field_name_mapping
+    mapping:
+      EventNamespace: wmi_namespace
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 19
+    
+  - id: Filter_mapping
+    type: field_name_mapping
+    mapping:
+      Filter: wmi_filter_path
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 21
+  
+  - id: ImageLoaded_Driver_mapping
+    type: field_name_mapping
+    mapping:
+      ImageLoaded: driver_loaded
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 6
+    
+  - id: ImageLoaded_Module_mapping
+    type: field_name_mapping
+    mapping:
+      ImageLoaded: module_loaded
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 7
+    
+  - id: Initiated_mapping
+    type: field_name_mapping
+    mapping:
+      Initiated: network_initiated
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 3
+    
+  - id: IntegrityLevel_mapping
+    type: field_name_mapping
+    mapping:
+      IntegrityLevel: process_integrity_level
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 1
+    
+  - id: IpAddresses_mapping
+    type: field_name_mapping
+    mapping:
+      IpAddresses: ip_addresses
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 5168
+  
+  - id: Name_Filter_mapping
+    type: field_name_mapping
+    mapping:
+      Name: wmi_filter_name
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 19
+    
+  - id: Name_consumer_mapping
+    type: field_name_mapping
+    mapping:
+      Name: wmi_consumer_name
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 20
+    
+  - id: NewName_mapping
+    type: field_name_mapping
+    mapping:
+      NewName: registry_key_new_name
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 14
+
+  - id: Operation_wmi_19_mapping
+    type: field_name_mapping
+    mapping:
+      Operation: wmi_operation
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 19
+
+  - id: Operation_wmi_20_mapping
+    type: field_name_mapping
+    mapping:
+      Operation: wmi_operation
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 20
+
+  - id: Operation_wmi_21_mapping
+    type: field_name_mapping
+    mapping:
+      Operation: wmi_operation
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 21
+
+  - id: Operation_key_5058_mapping
+    type: field_name_mapping
+    mapping:
+      Operation: key_operation
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5058
+
+  - id: Operation_key_5059_mapping
+    type: field_name_mapping
+    mapping:
+      Operation: key_operation
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5059
+
+  - id: Operation_key_5061_mapping
+    type: field_name_mapping
+    mapping:
+      Operation: key_operation
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5061
+
+  - id: OperationType_object_4657_mapping
+    type: field_name_mapping
+    mapping:
+      OperationType: object_operation_type
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4657
+
+  - id: OperationType_object_4660_mapping
+    type: field_name_mapping
+    mapping:
+      OperationType: object_operation_type
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4660
+
+  - id: OperationType_object_4661_mapping
+    type: field_name_mapping
+    mapping:
+      OperationType: object_operation_type
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4661
+
+  - id: OperationType_object_4662_mapping
+    type: field_name_mapping
+    mapping:
+      OperationType: object_operation_type
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4662
+
+  - id: OperationType_object_4663_mapping
+    type: field_name_mapping
+    mapping:
+      OperationType: object_operation_type
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4663
+
+  - id: OperationType_dsoperation_5136_mapping
+    type: field_name_mapping
+    mapping:
+      OperationType: dsoperation_type
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5136
+
+  - id: OperationType_dsoperation_5137_mapping
+    type: field_name_mapping
+    mapping:
+      OperationType: dsoperation_type
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5137
+
+  - id: OperationType_dsoperation_5138_mapping
+    type: field_name_mapping
+    mapping:
+      OperationType: dsoperation_type
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5138
+
+  - id: OperationType_dsoperation_5139_mapping
+    type: field_name_mapping
+    mapping:
+      OperationType: dsoperation_type
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5139
+
+  - id: OperationType_dsoperation_5141_mapping
+    type: field_name_mapping
+    mapping:
+      OperationType: dsoperation_type
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5141
+
+  - id: OperationType_dsoperation_5169_mapping
+    type: field_name_mapping
+    mapping:
+      OperationType: dsoperation_type
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5169
+
+  - id: OperationType_dsoperation_5170_mapping
+    type: field_name_mapping
+    mapping:
+      OperationType: dsoperation_type
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5170
+
+  - id: Protocol_3_mapping
+    type: field_name_mapping
+    mapping:
+      Protocol: network_protocol
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 3
+
+  - id: Protocol_5152_mapping
+    type: field_name_mapping
+    mapping:
+      Protocol: network_protocol
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5152
+
+  - id: Protocol_5154_mapping
+    type: field_name_mapping
+    mapping:
+      Protocol: network_protocol
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5154
+
+  - id: Protocol_5156_mapping
+    type: field_name_mapping
+    mapping:
+      Protocol: network_protocol
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5156
+
+  - id: Protocol_5157_mapping
+    type: field_name_mapping
+    mapping:
+      Protocol: network_protocol
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5157
+
+  - id: Protocol_5158_mapping
+    type: field_name_mapping
+    mapping:
+      Protocol: network_protocol
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5158
+
+  - id: Query_mapping
+    type: field_name_mapping
+    mapping:
+      Query: wmi_query
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 19
+    
+  - id: SchemaVersion_mapping
+    type: field_name_mapping
+    mapping:
+      SchemaVersion: sysmon_schema_version
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 4
+  
+  - id: State_Service_mapping
+    type: field_name_mapping
+    mapping:
+      State: service_state
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 4
+  
+  - id: State_Sysmon_mapping
+    type: field_name_mapping
+    mapping:
+      State: sysmon_configuration_state
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 16
+    
+  - id: subject_user_name_4611_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4611
+
+  - id: subject_user_name_4616_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4616
+
+  - id: subject_user_name_4648_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4648
+
+  - id: subject_user_name_4656_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4656
+
+  - id: subject_user_name_4657_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4657
+
+  - id: subject_user_name_4658_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4658
+
+  - id: subject_user_name_4659_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4659
+
+  - id: subject_user_name_4660_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4660
+
+  - id: subject_user_name_4661_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4661
+
+  - id: subject_user_name_4662_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4662
+
+  - id: subject_user_name_4663_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4663
+
+  - id: subject_user_name_4664_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4664
+
+  - id: subject_user_name_4670_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4670
+
+  - id: subject_user_name_4672_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4672
+
+  - id: subject_user_name_4673_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4673
+
+  - id: subject_user_name_4674_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4674
+
+  - id: subject_user_name_4688_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4688
+
+  - id: subject_user_name_4689_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4689
+
+  - id: subject_user_name_4690_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4690
+
+  - id: subject_user_name_4692_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4692
+
+  - id: subject_user_name_4693_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4693
+
+  - id: subject_user_name_4694_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4694
+
+  - id: subject_user_name_4695_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4695
+
+  - id: subject_user_name_4696_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4696
+
+  - id: subject_user_name_4697_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4697
+
+  - id: subject_user_name_4698_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4698
+
+  - id: subject_user_name_4699_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4699
+
+  - id: subject_user_name_4700_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4700
+
+  - id: subject_user_name_4701_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4701
+
+  - id: subject_user_name_4702_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4702
+
+  - id: subject_user_name_4703_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4703
+
+  - id: subject_user_name_4704_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4704
+
+  - id: subject_user_name_4715_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4715
+
+  - id: subject_user_name_4719_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4719
+
+  - id: subject_user_name_4720_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4720
+
+  - id: subject_user_name_4722_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4722
+
+  - id: subject_user_name_4723_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4723
+
+  - id: subject_user_name_4724_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4724
+
+  - id: subject_user_name_4725_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4725
+
+  - id: subject_user_name_4726_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4726
+
+  - id: subject_user_name_4727_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4727
+
+  - id: subject_user_name_4728_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4728
+
+  - id: subject_user_name_4729_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4729
+
+  - id: subject_user_name_4730_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4730
+
+  - id: subject_user_name_4731_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4731
+
+  - id: subject_user_name_4732_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4732
+
+  - id: subject_user_name_4733_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4733
+
+  - id: subject_user_name_4734_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4734
+
+  - id: subject_user_name_4735_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4735
+
+  - id: subject_user_name_4737_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4737
+
+  - id: subject_user_name_4738_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4738
+
+  - id: subject_user_name_4741_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4741
+
+  - id: subject_user_name_4742_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4742
+
+  - id: subject_user_name_4743_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4743
+
+  - id: subject_user_name_4744_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4744
+
+  - id: subject_user_name_4745_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4745
+
+  - id: subject_user_name_4746_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4746
+
+  - id: subject_user_name_4747_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4747
+
+  - id: subject_user_name_4748_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4748
+
+  - id: subject_user_name_4749_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4749
+
+  - id: subject_user_name_4750_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4750
+
+  - id: subject_user_name_4751_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4751
+
+  - id: subject_user_name_4752_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4752
+
+  - id: subject_user_name_4753_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4753
+
+  - id: subject_user_name_4754_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4754
+
+  - id: subject_user_name_4755_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4755
+
+  - id: subject_user_name_4756_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4756
+
+  - id: subject_user_name_4757_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4757
+
+  - id: subject_user_name_4758_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4758
+
+  - id: subject_user_name_4759_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4759
+
+  - id: subject_user_name_4760_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4760
+
+  - id: subject_user_name_4761_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4761
+
+  - id: subject_user_name_4762_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4762
+
+  - id: subject_user_name_4763_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4763
+
+  - id: subject_user_name_4764_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4764
+
+  - id: subject_user_name_4781_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4781
+
+  - id: subject_user_name_4782_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4782
+
+  - id: subject_user_name_4793_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4793
+
+  - id: subject_user_name_4794_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4794
+
+  - id: subject_user_name_4797_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4797
+
+  - id: subject_user_name_4798_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4798
+
+  - id: subject_user_name_4799_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4799
+
+  - id: subject_user_name_4817_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4817
+
+  - id: subject_user_name_4882_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4882
+
+  - id: subject_user_name_4883_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4883
+
+  - id: subject_user_name_4902_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4902
+
+  - id: subject_user_name_4904_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4904
+
+  - id: subject_user_name_4905_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4905
+
+  - id: subject_user_name_4906_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4906
+
+  - id: subject_user_name_4907_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4907
+
+  - id: subject_user_name_4908_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4908
+
+  - id: subject_user_name_4912_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4912
+
+  - id: subject_user_name_4964_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4964
+
+  - id: subject_user_name_4985_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4985
+
+  - id: subject_user_name_5051_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5051
+
+  - id: subject_user_name_5058_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5058
+
+  - id: subject_user_name_5059_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5059
+
+  - id: subject_user_name_5061_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5061
+
+  - id: subject_user_name_5136_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5136
+
+  - id: subject_user_name_5137_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5137
+
+  - id: subject_user_name_5138_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5138
+
+  - id: subject_user_name_5139_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5139
+
+  - id: subject_user_name_5140_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5140
+
+  - id: subject_user_name_5141_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5141
+
+  - id: subject_user_name_5142_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5142
+
+  - id: subject_user_name_5143_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5143
+
+  - id: subject_user_name_5144_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5144
+
+  - id: subject_user_name_5145_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5145
+
+  - id: subject_user_name_5168_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5168
+
+  - id: subject_user_name_5169_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5169
+
+  - id: subject_user_name_5170_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5170
+
+  - id: subject_user_name_5376_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5376
+
+  - id: subject_user_name_5377_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5377
+
+  - id: subject_user_name_5378_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5378
+
+  - id: subject_user_name_5379_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5379
+
+  - id: subject_user_name_5632_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5632
+
+  - id: subject_user_name_5633_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 5633
+
+  - id: subject_user_name_6416_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 6416
+
+  - id: subject_user_reporter_4624_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_reporter_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4624
+
+  - id: subject_user_reporter_4625_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_reporter_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4625
+
+  - id: subject_user_reporter_4626_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_reporter_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4626
+
+  - id: subject_user_reporter_4627_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_reporter_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4627
+
+  - id: subject_user_reporter_4649_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_reporter_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4649
+
+  - id: subject_user_reporter_4740_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_reporter_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4740
+
+  - id: subject_user_reporter_4767_mapping
+    type: field_name_mapping
+    mapping:
+      SubjectUserName: user_reporter_name
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4767
+
+  - id: TargetServer_mapping
+    type: field_name_mapping
+    mapping:
+      TargetServer: dst_original_value
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 5738
+    
+  - id: Type_consumer_mapping
+    type: field_name_mapping
+    mapping:
+      Type: wmi_consumer_type
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 20
+    
+  - id: Type_credentials_mapping
+    type: field_name_mapping
+    mapping:
+      Type: credentials_read_type
+    rule_conditions:
+      - type: contains_detection_item 
+        field: EventID 
+        value: 5379
+
+  - id: Value_1102_mapping
+    type: field_name_mapping
+    mapping:
+      Value: dst_ip_addr
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 1102
+
+  - id: Value_1104_mapping
+    type: field_name_mapping
+    mapping:
+      Value: dst_ip_addr
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 1104
+
+  - id: Version_4_mapping
+    type: field_name_mapping
+    mapping:
+      Version: sysmon_version
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4
+
+  - id: PrivilegeList_user_4720_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4720
+
+  - id: PrivilegeList_user_4722_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4722
+
+  - id: PrivilegeList_user_4723_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4723
+
+  - id: PrivilegeList_user_4724_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4724
+
+  - id: PrivilegeList_user_4725_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4725
+
+  - id: PrivilegeList_user_4726_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4726
+
+  - id: PrivilegeList_user_4727_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4727
+
+  - id: PrivilegeList_user_4728_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4728
+
+  - id: PrivilegeList_user_4729_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4729
+
+  - id: PrivilegeList_user_4730_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4730
+
+  - id: PrivilegeList_user_4731_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4731
+
+  - id: PrivilegeList_user_4732_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4732
+
+  - id: PrivilegeList_user_4733_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4733
+
+  - id: PrivilegeList_user_4734_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4734
+
+  - id: PrivilegeList_user_4735_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4735
+
+  - id: PrivilegeList_user_4737_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4737
+
+  - id: PrivilegeList_user_4738_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4738
+
+  - id: PrivilegeList_user_4741_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4741
+
+  - id: PrivilegeList_user_4742_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4742
+
+  - id: PrivilegeList_user_4743_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4743
+
+  - id: PrivilegeList_user_4744_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4744
+
+  - id: PrivilegeList_user_4745_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4745
+
+  - id: PrivilegeList_user_4746_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4746
+
+  - id: PrivilegeList_user_4747_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4747
+
+  - id: PrivilegeList_user_4748_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4748
+
+  - id: PrivilegeList_user_4749_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4749
+
+  - id: PrivilegeList_user_4750_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4750
+
+  - id: PrivilegeList_user_4751_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4751
+
+  - id: PrivilegeList_user_4752_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4752
+
+  - id: PrivilegeList_user_4753_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4753
+
+  - id: PrivilegeList_user_4754_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4754
+
+  - id: PrivilegeList_user_4755_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4755
+
+  - id: PrivilegeList_user_4756_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4756
+
+  - id: PrivilegeList_user_4757_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4757
+
+  - id: PrivilegeList_user_4758_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4758
+
+  - id: PrivilegeList_user_4759_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4759
+
+  - id: PrivilegeList_user_4760_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4760
+
+  - id: PrivilegeList_user_4761_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4761
+
+  - id: PrivilegeList_user_4762_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4762
+
+  - id: PrivilegeList_user_4763_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4763
+
+  - id: PrivilegeList_user_4764_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: user_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4764
+
+  - id: PrivilegeList_object_4656_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: object_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4656
+
+  - id: PrivilegeList_object_4660_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: object_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4660
+
+  - id: PrivilegeList_object_4661_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: object_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4661
+
+  - id: PrivilegeList_object_4662_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: object_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4662
+
+  - id: PrivilegeList_object_4663_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: object_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4663
+
+  - id: PrivilegeList_object_4674_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: object_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4674
+
+  - id: PrivilegeList_logon_4672_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: logon_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4672
+
+  - id: PrivilegeList_service_4673_mapping
+    type: field_name_mapping
+    mapping:
+      PrivilegeList: service_privilege_list
+    rule_conditions:
+      - type: contains_detection_item
+        field: EventID
+        value: 4673
+
+  - id: All_mapping
+    type: field_name_mapping
+    mapping:
+      AccountName: user_name
+      AllowedToDelegateTo: target_user_allowed_to_delegate
+      AppCorrelationID: dsoperation_app_correlation_id
+      AttributeLDAPDisplayName: dsobject_attribute_name
+      AttributeSyntaxOID: dsobject_attribute_type
+      AttributeValue: dsobject_attribute_value
+      AuditPolicyChanges: policy_changes
+      AuthenticationPackageName: logon_authentication_package
+      CallingProcessName: process_path
+      CallTrace: process_call_trace
+      ClientAddress: src_ip_addr
+      ClientIPAddress: src_ip_addr
+      ClientIP: src_original_value
+      CommandLine: process_command_line
+      Company: file_company
+      ComputerName: host_name
+      ConnectedViaIPAddress: dst_nat_ip_addr
+      CurrentDirectory: process_current_directory
+      Description: file_description
+      DestAddress: dst_ip_addr
+      DestinationHostname: dst_host_name
+      DestinationIp: dst_ip_addr
+      DestinationPort: dst_port
+      DestinationPortName: dst_port_name
+      DestinationIsIpv6: dst_is_ipv6
+      Device: device_name
+      DSName: host_domain
+      DSType: dsobject_domain_type
+      EngineVersion: powershell.engine.version
+      EventID: event_id
+      EventType: event_category_type
+      FailureCode: ticket_failure_code
+      FileName: file_name
+      FileVersion: file_version
+      GrantedAccess: process_granted_access
+      GroupName: group_name
+      GroupSid: group_sid
+      HiveName: hive_name
+      HostVersion: powershell.host.version
+      Image: process_path
+      Imphash: hash_imphash
+      ipAddress: dst_ip_addr
+      IpAddress: src_original_value
+      IPString: src_ip_addr
+      LaunchedViaIPAddress: dst_ip_addr
+      LogonProcessName: logon_process_name
+      LogonType: logon_type
+      MachineIpAddress: dst_ip_addr
+      MachineName: host_name
+      NewObjectDN: dsobject_new_dn
+      NewProcessName: process_path
+      ObjectClass: dsobject_class
+      ObjectDN: dsobject_dn
+      ObjectGUID: dsobject_guid
+      ObjectName: object_name
+      ObjectServer: object_server
+      ObjectType: object_type
+      ObjectValueName: object_value_name
+      OldObjectDN: dsobject_old_dn
+      OpCorrelationID: dsoperation_correlation_id
+      OriginalFileName: file_name_original
+      ParentImage: process_parent_path
+      ParentProcessName: process_parent_path
+      PasswordLastSet: user_attribute_password_lastset
+      Path: process_path
+      ParentCommandLine: process_parent_command_line
+      PipeName: pipe_name
+      ProcessCommandLine: process_command_line
+      ProcessName: process_path
+      processPath: process_path
+      ProcessPath: process_path
+      Product: file_product
+      Properties: object_properties
+      RelativeTargetName: share_relative_target_name
+      SamAccountName: user_attribute_samaccount_name
+      ServiceFileName: service_image_path
+      ServiceName: service_name
+      ShareName: share_name
+      Signature: signature
+      SignatureStatus: signature_status
+      Signed: signed
+      Source: source_name
+      SourceAddress: src_ip_addr
+      SourceHostname: src_host_name
+      SourceIsIpv6: src_is_ipv6
+      SourceImage: process_path
+      SourceIp: src_ip_addr
+      SourcePort: src_port
+      SourcePortName: src_port_name
+      StartAddress: thread_start_address
+      StartFunction: thread_start_function
+      StartModule: thread_start_module
+      Status: event_status
+      SubjectDomainName: user_domain
+      TargetServerName: target_server_name
+      TaskName: task_name
+      TicketEncryptionType: ticket_encryption_type
+      TicketOptions: ticket_options
+      TargetFilename: file_name
+      TargetImage: target_process_path
+      TargetProcessAddress: thread_start_address
+      TargetObject: registry_key_path
+      TransactionId: object_transaction_guid
+      User: user_account
+      UserName: user_name
+      Workstation: src_host_name
+      WorkstationName: src_host_name
+      UtcTime: '@timestamp'
+      EventTime: '@timestamp'
