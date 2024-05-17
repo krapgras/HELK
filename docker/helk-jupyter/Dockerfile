@@ -35,6 +35,8 @@ RUN chown -R ${USER} ${JUPYTER_DIR} ${HOME} ${SPARK_HOME} \
     && chown ${USER} /run/postgresql \
     && chown ${USER} /opt/jupyter/scripts/jupyter-cmd.sh \
     && chmod +x /opt/jupyter/scripts/jupyter-cmd.sh
+#Fix hyperframe to work on python 3.11
+RUN sed -i '/import collections/a import sys\nif sys.version_info.major == 3 and sys.version_info.minor >= 10:\n    setattr(collections, "MutableSet", collections.abc.MutableSet)\n    setattr(collections, "MutableMapping", collections.abc.MutableMapping)' /opt/conda/lib/python3.11/site-packages/hyperframe/flags.py
 
 WORKDIR ${HOME}
 ENTRYPOINT ["/opt/jupyter/scripts/jupyter-entrypoint.sh"]
