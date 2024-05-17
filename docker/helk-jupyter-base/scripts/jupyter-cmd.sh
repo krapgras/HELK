@@ -11,6 +11,8 @@ NOTEBOOK_ERROR_TAG="[NOTEBOOK-JUPYTER-DOCKER-INSTALLATION-ERROR]"
 # ***** Defining Jupyter params array **********
 params=()
 
+$SPARK_HOME/sbin/spark-worker-entrypoint.sh
+
 # **** Setting Jupyter Notebook Type ******
 if [[ -z "$JUPYTER_TYPE" ]]; then
     JUPYTER_TYPE="notebook"

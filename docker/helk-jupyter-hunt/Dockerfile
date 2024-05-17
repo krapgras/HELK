@@ -66,5 +66,3 @@ USER root
 RUN chown -R ${USER} ${JUPYTER_DIR} ${HOME} ${SPARK_HOME}
 
 USER ${USER}
-WORKDIR $SPARK_HOME/sbin
-ENTRYPOINT ["./spark-worker-entrypoint.sh"]
