@@ -39,7 +39,7 @@ fi
 # ****** SETTINGS ******
 # SPARM MASTER
 if [ -z "$SPARK_MASTER" ]; then
-  SPARK_MASTER=spark://localhost:7077
+  SPARK_MASTER=spark://helk-spark-master:7077
 fi
 echo "[+] Setting SPARK_MASTER to $SPARK_MASTER"
 

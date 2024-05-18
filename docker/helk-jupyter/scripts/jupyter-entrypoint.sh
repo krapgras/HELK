@@ -10,6 +10,9 @@
 NOTEBOOK_INFO_TAG="[NOTEBOOK-JUPYTER-DOCKER-INSTALLATION-INFO]"
 NOTEBOOK_ERROR_TAG="[NOTEBOOK-JUPYTER-DOCKER-INSTALLATION-ERROR]"
 
+chmod +x $SPARK_HOME/sbin/spark-worker-entrypoint.sh
+$SPARK_HOME/sbin/spark-worker-entrypoint.sh
+
 # ************ Starting Postgresql for Spark ****************
 PGDATA=${PGDATA:-/home/jupyter/srv/pgsql}
  
