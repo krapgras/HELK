@@ -54,8 +54,8 @@ Currently, the HELK comes with 3 dashboards:
 
 ## Troubleshooting
 
-Apart from running `docker ps` and `docker logs --follow --tail 25 helk-kibana`, additionally you can look at logs located at `/usr/share/kibana/config/kibana_logs.log`.
+Apart from running `docker ps` and `docker logs --follow --tail 25 helk-kibana`, additionally you can look at logs located at `/usr/share/kibana/config/kibana.log`.
 
-Example: `docker exec helk-kibana tail -f /usr/share/kibana/config/kibana_logs.log`
+Example: `docker exec helk-kibana tail -f /usr/share/kibana/config/kibana.log`
 
 Many times Kibana will not be "working" because elasticsearch is still starting up or has ran into an error.

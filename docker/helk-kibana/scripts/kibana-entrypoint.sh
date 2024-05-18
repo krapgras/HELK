@@ -103,4 +103,4 @@ exec /usr/local/bin/kibana-docker &
 echo "$HELK_INFO_TAG Running kibana-setup.sh.."
 /usr/share/kibana/scripts/kibana-setup.sh
 
-tail -f /usr/share/kibana/config/kibana_logs.log
+tail -f /usr/share/kibana/config/kibana.log
