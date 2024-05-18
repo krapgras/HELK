@@ -14,7 +14,7 @@ ENV ESALERT_HOME=/etc/elastalert
 ENV ESALERT_SIGMA_HOME=/opt/sigma
 
 RUN apt update && apt -y upgrade \
-    && apt -y install jq curl gcc libffi-dev git \
+    && apt -y install jq curl gcc libffi-dev git yamllint \
     && rm -rf /var/lib/apt/lists/* \
     && git clone https://github.com/jertel/elastalert2.git ${ESALERT_HOME} \
     && bash -c 'mkdir -pv /etc/elastalert/rules' \

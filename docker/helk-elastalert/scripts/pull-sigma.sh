@@ -239,3 +239,9 @@ echo "---------------------------------------------------------"
 echo -e "${HELK_INFO_TAG} [+++] Finished splitting $rule_counter Elastalert rules"
 echo "---------------------------------------------------------"
 echo " "
+echo "---------------------------------------------------------"
+echo -e "${HELK_INFO_TAG} [+++] Removing rules with syntax errors"
+echo "---------------------------------------------------------"
+echo " "
+
+yamllint -d "{rules:{}}" --no-warnings ${ESALERT_HOME}/rules/ | grep -F '.' 2>&1 | xargs rm
