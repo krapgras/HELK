@@ -243,5 +243,6 @@ echo "---------------------------------------------------------"
 echo -e "${HELK_INFO_TAG} [+++] Removing rules with syntax errors"
 echo "---------------------------------------------------------"
 echo " "
-
+#lint yaml file with no rules, grep file paths and remove files with syntax errors
+find ${ESALERT_HOME}/rules/* -type f -exec sed -i 's/owner: @/owner: /g' "{}" \;
 yamllint -d "{rules:{}}" --no-warnings ${ESALERT_HOME}/rules/ | grep -F '.' 2>&1 | xargs rm
